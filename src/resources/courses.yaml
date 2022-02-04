@@ -1,7 +1,9 @@
 get:
-  summary: List Courses
+  summary: List
   operationId: listCourses
   description: List courses according to the given query
+  tags:
+    - courses
   parameters:
     - name: chiefProfessor
       in: query
@@ -18,9 +20,11 @@ get:
     default:
       $ref: "../responses/UnexpectedError.yaml"
 post:
-  summary: Create a course
+  summary: Create
   operationId: createCourse
   description: Create a course
+  tags:
+    - courses
   requestBody:
     required: true
     content:

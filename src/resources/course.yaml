@@ -1,7 +1,9 @@
 get:
-  summary: Course Detail
+  summary: Detail
   operationId: getCourseById
   description: Information for a specific course
+  tags:
+    - courses
   parameters:
     - name: courseID
       in: path
