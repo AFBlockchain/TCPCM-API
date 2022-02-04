@@ -1,5 +1,5 @@
 get:
-  summary: Detail
+  summary: Course Detail
   operationId: getCourseById
   description: Information for a specific course
   tags:

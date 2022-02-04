@@ -5,21 +5,21 @@ description: A class under a TCPC course
 type: object
 required:
   - courseID
-  - ID
   - type
+  - componentCode
   - chiefProfessor
 properties:
   courseID:
     description: The TCPC course this class is under
     type: string
   ID:
-    description: Unique identifier of a class
+    description: Unique identifier of a class. This property is **deduced**.
     type: string
   type:
-    description: The type of this class, seminar or lab
+    description: The type of this class, currently *seminar* or *lab*
     type: string
   componentCode:
-    description: Serial number for this component starting from 1
+    description: Serial number for this component. Defined by the `chiefProfessor`
     type: integer
     format: int32
   chiefProfessor:
@@ -35,3 +35,15 @@ properties:
     type: array
     items:
       type: string
+example:
+  courseID: AF4912BFBD
+  ID: AF4912BFBDSEM1
+  type: SEM
+  componentCode: 1
+  chiefProfessor: brian
+  experts:
+    - stanley
+    - peter
+  students:
+    - alice
+    - bob

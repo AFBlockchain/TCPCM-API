@@ -1,5 +1,5 @@
 get:
-  summary: List
+  summary: List Classes
   operationId: listClasses
   description: List classes according to the given query
   tags:
@@ -17,13 +17,14 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../schemas/Class.yaml"
+            type: array
+            items:
+              $ref: "../../schemas/Class.yaml"
     default:
       $ref: "../../responses/UnexpectedError.yaml"
 post:
-  summary: Create
+  summary: Create class
   operationId: createClass
-  description: Create a class
   tags:
     - classes
   requestBody:

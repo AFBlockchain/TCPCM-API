@@ -1,5 +1,5 @@
 get:
-  summary: Detail
+  summary: Class Detail
   operationId: getClassById
   description: Information for a specific class
   tags:

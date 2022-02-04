@@ -20,7 +20,7 @@ get:
     default:
       $ref: "../../responses/UnexpectedError.yaml"
 patch:
-  summary: Grade
+  summary: Grade Quiz
   operationId: gradeQuiz
   description: Grade a single quiz record
   tags:

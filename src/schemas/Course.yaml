@@ -1,4 +1,4 @@
-# Ref: https://afblockchain.atlassian.net/jira/software/projects/TCPCM/boards/2?selectedIssue=TCPCM-89&text=CourseS
+# Ref: https://github.com/AFBlockchain/tcpcdapp/blob/main/contracts/src/main/kotlin/hk/edu/polyu/af/bc/tcpc/states/CourseState.kt
 
 title: Course
 description: A TCPC Course
@@ -8,24 +8,27 @@ required:
   - title
   - theme
   - chiefProfessor
+  - professors
 properties:
   ID:
-    description: Unique identifier of a course,
+    description: Unique identifier of a course (i.e. subject code)
     type: string
   title: 
-    description: The subject title,
+    description: The subject title
     type: string
   theme:
-    description: Course theme,
+    description: Course theme
     type: string
   chiefProfessor:
     description: The user (professor who manages this course)
     type: string
   professors:
-    description: The professors teaching this course
+    description: | 
+      The professors teaching this course. This should at least include the `chiefProfessor`
     type: array
     items:
       type: string
+    minItems: 1
   experts:
     description: The industry experts sponsoring this course
     type: array

@@ -1,5 +1,5 @@
 get:
-  summary: List
+  summary: List Courses
   operationId: listCourses
   description: List courses according to the given query
   tags:
@@ -20,9 +20,8 @@ get:
     default:
       $ref: "../../responses/UnexpectedError.yaml"
 post:
-  summary: Create
+  summary: Create Course
   operationId: createCourse
-  description: Create a course
   tags:
     - courses
   requestBody:

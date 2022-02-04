@@ -6,6 +6,7 @@ type: object
 properties:
   ID:
     type: string
+    description: This ID is for system book-keeping and not used directly by the end users.
   quizID:
     type: string
   grader:
@@ -14,3 +15,10 @@ properties:
     type: string
   grade:
     type: string
+example:
+  ID: F9E52CBC-AC07-4B06-ABF9-46EE0C9F3EE1
+  quizID: AF4912BFBDQ1
+  grader: brian
+  student: alice
+  grade: A+
+  

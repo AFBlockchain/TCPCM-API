@@ -3,10 +3,19 @@
 title: Quiz
 description: A quiz in a TCPC course
 type: object
+required:
+  - courseID
+  - title
+  - description
+  - chiefProfessor
 properties:
   courseID:
     type: string
   ID:
+    type: string
+  title:
+    type: string
+  description:
     type: string
   chiefProfessor:
     type: string
@@ -14,3 +23,12 @@ properties:
     type: array
     items:
       type: string
+example:
+ courseID: AF4912BFBD
+ ID: AF4912BFBDQ1
+ title: Quiz 1
+ description: First Quiz of this course. Very simple.
+ chiefProfessor: brian
+ students:
+  - alice
+  - bob
