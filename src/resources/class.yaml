@@ -1,0 +1,21 @@
+get:
+  summary: Detail
+  operationId: getClassById
+  description: Information for a specific class
+  tags:
+    - classes
+  parameters:
+    - name: classID
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: ../schemas/Class.yaml
+    default:
+      $ref: ../responses/UnexpectedError.yaml

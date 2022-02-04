@@ -1,0 +1,39 @@
+get:
+  summary: List
+  operationId: listClasses
+  description: List classes according to the given query
+  tags:
+    - classes
+  parameters:
+    - $ref: ../parameters/query/courseID.yaml
+    - name: chiefProfessor
+      in: query
+      required: false
+      schema:
+        type: string
+  responses:
+    '200':
+      description: An array of classes
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Class.yaml"
+    default:
+      $ref: "../responses/UnexpectedError.yaml"
+post:
+  summary: Create
+  operationId: createClass
+  description: Create a class
+  tags:
+    - classes
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/Class.yaml"
+  responses:
+    '201':
+      $ref : "../responses/NullResponse.yaml"
+    default:
+      $ref : "../responses/UnexpectedError.yaml"

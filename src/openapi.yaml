@@ -16,6 +16,10 @@ paths:
     $ref: ./resources/courses.yaml
   /courses/{courseID}:
     $ref: ./resources/course.yaml
+  /classes:
+    $ref: ./resources/classes.yaml
+  /classes/{classID}:
+    $ref: ./resources/class.yaml
   /pets:
     $ref: "./resources/pets.yaml"
   /pets/{petId}:
