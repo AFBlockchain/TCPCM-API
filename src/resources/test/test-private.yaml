@@ -12,3 +12,7 @@ get:
           schema:
             type: string
             example: 'Successfully accessed private endpoint'
+    '401':
+      $ref: ../../responses/UnauthorizedError.yaml
+  security:
+  - basicAuth: []
