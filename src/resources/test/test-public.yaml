@@ -1,0 +1,14 @@
+get:
+  summary: Ping Public
+  operationId: pingPublic
+  description: Testing connection by pinging a *public* endpoint.
+  tags:
+    - test
+  responses:
+    '200':
+      description: 'Success'
+      content: 
+        text/plain:
+          schema:
+            type: string
+            example: 'Successfully accessed public endpoint'

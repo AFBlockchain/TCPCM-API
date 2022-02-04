@@ -1,0 +1,14 @@
+get:
+  summary: Ping Private
+  operationId: pingPrivate
+  description: Testing connection by pinging a *private* endpoint.
+  tags:
+    - test
+  responses:
+    '200':
+      description: 'Success'
+      content: 
+        text/plain:
+          schema:
+            type: string
+            example: 'Successfully accessed private endpoint'

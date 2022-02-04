@@ -10,7 +10,7 @@ info:
     url: http://www.example.com/support
     email: support@example.com
 servers:
-  - url: http://petstore.swagger.io/v1
+  - url: http://ec2-54-165-183-53.compute-1.amazonaws.com:8080
 paths:
   /courses:
     $ref: ./resources/course/courses.yaml
@@ -28,6 +28,10 @@ paths:
     $ref: ./resources/quiz/quiz-records.yaml
   /quiz-records/{quizRecordID}:
     $ref: ./resources/quiz/quiz-record.yaml
+  /test/public:
+    $ref: ./resources/test/test-public.yaml
+  /test/private:
+    $ref: ./resources/test/test-private.yaml
   /pets:
     $ref: "./resources/pets.yaml"
   /pets/{petId}:
