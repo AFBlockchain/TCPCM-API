@@ -1,0 +1,21 @@
+get:
+  summary: Detail
+  operationId: getQuizById
+  description: Information for a specific quiz
+  tags:
+    - quizzes
+  parameters:
+    - name: quizID
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Quiz.yaml"
+    default:
+      $ref: "../responses/UnexpectedError.yaml"

@@ -20,6 +20,10 @@ paths:
     $ref: ./resources/classes.yaml
   /classes/{classID}:
     $ref: ./resources/class.yaml
+  /quizzes:
+    $ref: ./resources/quizzes.yaml
+  /quizzes/{quizID}:
+    $ref: ./resources/quiz.yaml
   /pets:
     $ref: "./resources/pets.yaml"
   /pets/{petId}:
