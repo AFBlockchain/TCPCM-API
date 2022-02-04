@@ -22,8 +22,7 @@ get:
         application/json:
           schema:
             type: array
-            item:
-              schema:
-               $ref: "../schemas/QuizRecord.yaml"
+            items:
+              $ref: "../../schemas/QuizRecord.yaml"
     default:
-      $ref: "../responses/UnexpectedError.yaml"
+      $ref: "../../responses/UnexpectedError.yaml"

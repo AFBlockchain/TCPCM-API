@@ -16,9 +16,9 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../schemas/QuizRecord.yaml"
+            $ref: "../../schemas/QuizRecord.yaml"
     default:
-      $ref: "../responses/UnexpectedError.yaml"
+      $ref: "../../responses/UnexpectedError.yaml"
 patch:
   summary: Grade
   operationId: gradeQuiz
@@ -46,4 +46,13 @@ patch:
               type: string
             grade:
               type: string
+  responses:
+    '200':
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/QuizRecord.yaml"
+    default:
+      $ref: "../../responses/UnexpectedError.yaml"
   

@@ -16,6 +16,6 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../schemas/Course.yaml"
+            $ref: "../../schemas/Course.yaml"
     default:
-      $ref: "../responses/UnexpectedError.yaml"
+      $ref: "../../responses/UnexpectedError.yaml"

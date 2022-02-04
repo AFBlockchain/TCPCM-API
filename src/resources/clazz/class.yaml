@@ -1,11 +1,11 @@
 get:
-  summary: Quiz Detail
-  operationId: getQuizById
-  description: Information for a specific quiz
+  summary: Detail
+  operationId: getClassById
+  description: Information for a specific class
   tags:
-    - quizzes
+    - classes
   parameters:
-    - name: quizID
+    - name: classID
       in: path
       required: true
       schema:
@@ -16,6 +16,6 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../schemas/Quiz.yaml"
+            $ref: ../../schemas/Class.yaml
     default:
-      $ref: "../responses/UnexpectedError.yaml"
+      $ref: ../../responses/UnexpectedError.yaml

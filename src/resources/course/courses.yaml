@@ -16,9 +16,9 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../schemas/Course.yaml"
+            $ref: "../../schemas/Course.yaml"
     default:
-      $ref: "../responses/UnexpectedError.yaml"
+      $ref: "../../responses/UnexpectedError.yaml"
 post:
   summary: Create
   operationId: createCourse
@@ -30,9 +30,9 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../schemas/Course.yaml"
+          $ref: "../../schemas/Course.yaml"
   responses:
     '201':
-      $ref : "../responses/NullResponse.yaml"
+      $ref : "../../responses/NullResponse.yaml"
     default:
-      $ref : "../responses/UnexpectedError.yaml"
+      $ref : "../../responses/UnexpectedError.yaml"

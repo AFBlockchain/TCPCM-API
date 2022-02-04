@@ -5,7 +5,7 @@ get:
   tags:
     - classes
   parameters:
-    - $ref: ../parameters/query/courseID.yaml
+    - $ref: ../../parameters/query/courseID.yaml
     - name: chiefProfessor
       in: query
       required: false
@@ -17,9 +17,9 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../schemas/Class.yaml"
+            $ref: "../../schemas/Class.yaml"
     default:
-      $ref: "../responses/UnexpectedError.yaml"
+      $ref: "../../responses/UnexpectedError.yaml"
 post:
   summary: Create
   operationId: createClass
@@ -31,9 +31,9 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../schemas/Class.yaml"
+          $ref: "../../schemas/Class.yaml"
   responses:
     '201':
-      $ref : "../responses/NullResponse.yaml"
+      $ref : "../../responses/NullResponse.yaml"
     default:
-      $ref : "../responses/UnexpectedError.yaml"
+      $ref : "../../responses/UnexpectedError.yaml"

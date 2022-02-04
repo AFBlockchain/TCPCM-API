@@ -5,16 +5,16 @@ get:
   tags:
     - quizzes
   parameters:
-    - $ref: ../parameters/query/courseID.yaml
+    - $ref: ../../parameters/query/courseID.yaml
   responses:
     '200':
       description: An array of quizzes
       content:
         application/json:
           schema:
-            $ref: "../schemas/Quiz.yaml"
+            $ref: "../../schemas/Quiz.yaml"
     default:
-      $ref: "../responses/UnexpectedError.yaml"
+      $ref: "../../responses/UnexpectedError.yaml"
 post:
   summary: Create Quiz
   operationId: createQuiz
@@ -26,9 +26,9 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../schemas/Quiz.yaml"
+          $ref: "../../schemas/Quiz.yaml"
   responses:
     '201':
-      $ref : "../responses/NullResponse.yaml"
+      $ref : "../../responses/NullResponse.yaml"
     default:
-      $ref : "../responses/UnexpectedError.yaml"
+      $ref : "../../responses/UnexpectedError.yaml"

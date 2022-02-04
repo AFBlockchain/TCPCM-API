@@ -13,21 +13,21 @@ servers:
   - url: http://petstore.swagger.io/v1
 paths:
   /courses:
-    $ref: ./resources/courses.yaml
+    $ref: ./resources/course/courses.yaml
   /courses/{courseID}:
-    $ref: ./resources/course.yaml
+    $ref: ./resources/course/course.yaml
   /classes:
-    $ref: ./resources/classes.yaml
+    $ref: ./resources/clazz/classes.yaml
   /classes/{classID}:
-    $ref: ./resources/class.yaml
+    $ref: ./resources/clazz/class.yaml
   /quizzes:
-    $ref: ./resources/quizzes.yaml
+    $ref: ./resources/quiz/quizzes.yaml
   /quizzes/{quizID}:
-    $ref: ./resources/quiz.yaml
+    $ref: ./resources/quiz/quiz.yaml
   /quiz-records/:
-    $ref: ./resources/quiz-records.yaml
+    $ref: ./resources/quiz/quiz-records.yaml
   /quiz-records/{quizRecordID}:
-    $ref: ./resources/quiz-record.yaml
+    $ref: ./resources/quiz/quiz-record.yaml
   /pets:
     $ref: "./resources/pets.yaml"
   /pets/{petId}:
