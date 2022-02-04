@@ -1,6 +1,6 @@
 name: courseID
 in: query
-description: query a TCPC component by the top level courseID
+description: top level courseID
 required: false
 schema:
   type: string

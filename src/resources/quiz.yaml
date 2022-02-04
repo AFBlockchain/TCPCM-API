@@ -1,5 +1,5 @@
 get:
-  summary: Detail
+  summary: Quiz Detail
   operationId: getQuizById
   description: Information for a specific quiz
   tags:

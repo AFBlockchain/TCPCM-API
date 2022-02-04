@@ -4,6 +4,8 @@ title: QuizRecord
 description: Graded record for a quiz
 type: object
 properties:
+  ID:
+    type: string
   quizID:
     type: string
   grader:

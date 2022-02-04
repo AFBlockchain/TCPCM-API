@@ -24,6 +24,10 @@ paths:
     $ref: ./resources/quizzes.yaml
   /quizzes/{quizID}:
     $ref: ./resources/quiz.yaml
+  /quiz-records/:
+    $ref: ./resources/quiz-records.yaml
+  /quiz-records/{quizRecordID}:
+    $ref: ./resources/quiz-record.yaml
   /pets:
     $ref: "./resources/pets.yaml"
   /pets/{petId}:

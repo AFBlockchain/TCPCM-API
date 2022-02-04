@@ -1,5 +1,5 @@
 get:
-  summary: List
+  summary: List Quiz
   operationId: listQuizzes
   description: List quizzes according to the given query
   tags:
@@ -16,7 +16,7 @@ get:
     default:
       $ref: "../responses/UnexpectedError.yaml"
 post:
-  summary: Create
+  summary: Create Quiz
   operationId: createQuiz
   description: Create a quiz
   tags:

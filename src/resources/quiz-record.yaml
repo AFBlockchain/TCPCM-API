@@ -1,0 +1,49 @@
+get:
+  summary: Quiz Record Detail
+  operationId: getQuizRecordByID
+  description: Information for a specific quiz record
+  tags:
+    - quizzes
+  parameters:
+    - name: quizRecordID
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/QuizRecord.yaml"
+    default:
+      $ref: "../responses/UnexpectedError.yaml"
+patch:
+  summary: Grade
+  operationId: gradeQuiz
+  description: Grade a single quiz record
+  tags:
+    - quizzes
+  parameters:
+    - name: quizRecordID
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          title: QuizRecordGradingPatch
+          type: object
+          required:
+            - grader
+            - grade
+          properties:
+            grader:
+              type: string
+            grade:
+              type: string
+  
