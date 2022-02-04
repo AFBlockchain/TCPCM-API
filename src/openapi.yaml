@@ -12,6 +12,10 @@ info:
 servers:
   - url: http://petstore.swagger.io/v1
 paths:
+  /courses:
+    $ref: ./resources/courses.yaml
+  /courses/{courseID}:
+    $ref: ./resources/course.yaml
   /pets:
     $ref: "./resources/pets.yaml"
   /pets/{petId}:
