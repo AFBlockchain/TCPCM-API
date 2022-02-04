@@ -1,0 +1,20 @@
+# ref: https://github.com/AFBlockchain/tcpcdapp/blob/main/contracts/src/main/kotlin/hk/edu/polyu/af/bc/tcpc/states/ReportState.kt
+
+title: Report
+description: A Report in a TCPC course
+type: object
+properties:
+  courseID:
+    type: string
+  ID:
+    type: string
+  title:
+    type: string
+  description:
+    type: string
+  chiefProfessor:
+    type: string
+  students:
+    type: array
+    items:
+      type: string

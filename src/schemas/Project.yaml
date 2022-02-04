@@ -1,0 +1,31 @@
+# Ref: https://github.com/AFBlockchain/tcpcdapp/blob/main/contracts/src/main/kotlin/hk/edu/polyu/af/bc/tcpc/states/ProjectState.kt
+
+title: Project
+description: A project in a TCPC course
+type: object
+properties:
+  courseID:
+    description: The TCPC course this project is under
+    type: string
+  ID:
+    description: Unique identifier of a project
+    type: string
+  title:
+    description: project title
+    type: string
+  description:
+    description: a short description of this project
+    type: string
+  chiefProfessor:
+    description: The professor managing this project, inherited from the course
+    type: string
+  experts:
+    description: The industry experts assigned to this project, inherited from the course
+    type: array
+    items:
+      type: string
+  students:
+    description: The students assigned to this project, inherited from the course
+    type: array
+    items:
+      type: string

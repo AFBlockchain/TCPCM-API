@@ -1,4 +1,18 @@
-Pet:
-  $ref: "./Pet.yaml"
-Error:
-  $ref: "./Error.yaml"
+Course:
+  $ref: ./Course.yaml
+Class:
+  $ref: ./Class.yaml
+Group:
+  $ref: ./Group.yaml
+Project:
+  $ref: ./Project.yaml
+ProjectRecord:
+  $ref: ./ProjectRecord.yaml
+Quiz:
+  $ref: ./Quiz.yaml
+QuizRecord:
+  $ref: ./QuizRecord.yaml
+Report:
+  $ref: ./Report.yaml
+ReportRecord:
+  $ref: ./ReportRecord.yaml

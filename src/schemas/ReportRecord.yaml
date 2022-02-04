@@ -1,0 +1,16 @@
+# Ref: https://github.com/AFBlockchain/tcpcdapp/blob/main/contracts/src/main/kotlin/hk/edu/polyu/af/bc/tcpc/states/ReportRecordState.kt
+
+title: ReportRecord
+description: Graded and uploaded record for a report
+type: object
+properties:
+  reportID:
+    type: string
+  sha256Checksum:
+    type: string
+  chiefProfessor:
+    type: string
+  student:
+    type: string
+  grade:
+    type: string

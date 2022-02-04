@@ -1,0 +1,26 @@
+# Ref: https://afblockchain.atlassian.net/browse/TCPCM-123
+# Ref: https://github.com/AFBlockchain/tcpcdapp/blob/main/contracts/src/main/kotlin/hk/edu/polyu/af/bc/tcpc/states/GroupState.kt
+
+title: Group
+description: A group in a TCPC course
+type: object
+properties:
+  courseID:
+    description: The TCPC course this group is under
+    type: string
+  ID:
+    description: Unique identifier of a group
+    type: string
+  chiefProfessor:
+    description: The professor managing this group
+    type: string
+  experts:
+    description: The industry experts assigned to this group
+    type: array
+    items:
+      type: string
+  students:
+    description: The students assigned to this group
+    type: array
+    items:
+      type: string

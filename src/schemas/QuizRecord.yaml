@@ -1,0 +1,14 @@
+# Ref: https://github.com/AFBlockchain/tcpcdapp/blob/main/contracts/src/main/kotlin/hk/edu/polyu/af/bc/tcpc/states/QuizRecordState.kt
+
+title: QuizRecord
+description: Graded record for a quiz
+type: object
+properties:
+  quizID:
+    type: string
+  grader:
+    type: string
+  student:
+    type: string
+  grade:
+    type: string
