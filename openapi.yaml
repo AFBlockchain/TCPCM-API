@@ -10,7 +10,7 @@ info:
     url: 'http://www.example.com/support'
     email: support@example.com
 servers:
-  - url: 'http://petstore.swagger.io/v1'
+  - url: 'http://ec2-54-165-183-53.compute-1.amazonaws.com:8080'
 paths:
   /courses:
     get:
@@ -284,6 +284,44 @@ paths:
                 $ref: '#/components/schemas/QuizRecord'
         default:
           $ref: '#/components/responses/UnexpectedError'
+  /test/public:
+    get:
+      summary: Ping Public
+      operationId: pingPublic
+      description: Testing connection by pinging a *public* endpoint.
+      tags:
+        - test
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Successfully accessed public endpoint
+  /test/private:
+    get:
+      summary: Ping Private
+      operationId: pingPrivate
+      description: Testing connection by pinging a *private* endpoint.
+      tags:
+        - test
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Successfully accessed private endpoint
+        '401':
+          description: Authentication information is missing or invalid
+          headers:
+            WWW_Authenticate:
+              schema:
+                type: string
+      security:
+        - basicAuth: []
   /pets:
     get:
       summary: List
@@ -649,3 +687,7 @@ components:
                 type: string
     NullResponse:
       description: Null response
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
