@@ -47,7 +47,11 @@ paths:
               $ref: '#/components/schemas/Course'
       responses:
         '201':
-          $ref: '#/components/responses/NullResponse'
+          description: The created course
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
         default:
           $ref: '#/components/responses/UnexpectedError'
   '/courses/{courseID}':
@@ -408,17 +412,19 @@ components:
       description: A TCPC Course
       type: object
       required:
-        - ID
+        - code
         - title
         - theme
         - chiefProfessor
-        - professors
+        - deputyProfessors
       properties:
         ID:
-          description: Unique identifier of a course (i.e. subject code)
+          description: 'Unique identifier of a course across the platform. It is derived from the supplied `code` and `theme`. Later, `year` may also be incorporated.'
           type: string
+        code:
+          description: 'The subject code. For Capstone Course in AF, this is AF4912.'
         title:
-          description: The subject title
+          description: 'The subject title, normally "Capstone Project Course"'
           type: string
         theme:
           description: Course theme
@@ -426,13 +432,11 @@ components:
         chiefProfessor:
           description: The user (professor who manages this course)
           type: string
-        professors:
-          description: |
-            The professors teaching this course. This should at least include the `chiefProfessor`
+        deputyProfessors:
+          description: Other professors than the `chiefProfessor` teaching this course
           type: array
           items:
             type: string
-          minItems: 1
         experts:
           description: The industry experts sponsoring this course
           type: array
@@ -445,10 +449,11 @@ components:
             type: string
       example:
         ID: AF4912BFBD
+        code: AF4912
         title: Capstone Project Course
         theme: Blockchain for Business Digitization
         chiefProfessor: brian
-        professors:
+        deputyProfessors:
           - brian
           - jimmy
         experts:
@@ -457,6 +462,7 @@ components:
         students:
           - alice
           - bob
+          - charlie
     Class:
       title: Class
       description: A class under a TCPC course
