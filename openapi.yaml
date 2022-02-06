@@ -423,6 +423,7 @@ components:
           type: string
         code:
           description: 'The subject code. For Capstone Course in AF, this is AF4912.'
+          type: string
         title:
           description: 'The subject title, normally "Capstone Project Course"'
           type: string
