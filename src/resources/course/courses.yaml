@@ -32,6 +32,10 @@ post:
           $ref: "../../schemas/Course.yaml"
   responses:
     '201':
-      $ref : "../../responses/NullResponse.yaml"
+      description: The created course
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/Course.yaml"
     default:
       $ref : "../../responses/UnexpectedError.yaml"
