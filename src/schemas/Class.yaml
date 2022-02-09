@@ -10,20 +10,19 @@ required:
   - chiefProfessor
 properties:
   courseID:
-    description: The TCPC course this class is under
+    description: The ID of the TCPC course this class is under
     type: string
   ID:
-    description: Unique identifier of a class. This property is **deduced**.
+    description: Unique identifier of a class. This property is **deduced** by combing the `courseID`, `type` and `componentCode`
     type: string
   type:
-    description: The type of this class, currently *seminar* or *lab*
+    description: The type of this class, currently *seminar* or *lab*. Although no constraints are added.
     type: string
   componentCode:
     description: Serial number for this component. Defined by the `chiefProfessor`
-    type: integer
-    format: int32
+    type: string
   chiefProfessor:
-    description: The professor managing this class
+    description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`
     type: string
   experts:
     description: The industry experts assigned to this class
@@ -37,9 +36,9 @@ properties:
       type: string
 example:
   courseID: AF4912BFBD
-  ID: AF4912BFBDSEM1
+  ID: AF4912BFBD-SEM001
   type: SEM
-  componentCode: 1
+  componentCode: "001"
   chiefProfessor: brian
   experts:
     - stanley
