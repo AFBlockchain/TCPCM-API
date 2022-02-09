@@ -505,11 +505,8 @@ components:
         ID:
           description: 'Unique identifier of a class. This property is **deduced** by combing the `courseID`, `type` and `componentCode`'
           type: string
-        type:
-          description: 'The type of this class, currently *seminar* or *lab*. Although no constraints are added.'
-          type: string
         componentCode:
-          description: Serial number for this component. Defined by the `chiefProfessor`
+          description: 'The component code of a class, same as the system in e-student.'
           type: string
         chiefProfessor:
           description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`
@@ -527,8 +524,7 @@ components:
       example:
         courseID: AF4912BFBD
         ID: AF4912BFBD-SEM001
-        type: SEM
-        componentCode: '001'
+        componentCode: SEM001
         chiefProfessor: brian
         experts:
           - stanley
