@@ -20,6 +20,8 @@ paths:
     $ref: ./resources/clazz/classes.yaml
   /classes/{classID}:
     $ref: ./resources/clazz/class.yaml
+  /projects:
+    $ref: ./resources/project/projects.yaml
   /quizzes:
     $ref: ./resources/quiz/quizzes.yaml
   /quizzes/{quizID}:

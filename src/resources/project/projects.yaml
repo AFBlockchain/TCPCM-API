@@ -1,0 +1,20 @@
+post:
+  summary: Create Project
+  operationId: createProject
+  tags:
+    - projects
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../schemas/Project.yaml"
+  responses:
+    '201':
+      description: The created project (fully populated)
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/Project.yaml"
+    default:
+      $ref : "../../responses/UnexpectedError.yaml"
