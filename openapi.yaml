@@ -119,7 +119,11 @@ paths:
               $ref: '#/components/schemas/Class'
       responses:
         '201':
-          $ref: '#/components/responses/NullResponse'
+          description: The created class (fully populated)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
         default:
           $ref: '#/components/responses/UnexpectedError'
   '/classes/{classID}':
@@ -142,6 +146,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Class'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  /projects:
+    post:
+      summary: Create Project
+      operationId: createProject
+      tags:
+        - projects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '201':
+          description: The created project (fully populated)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
         default:
           $ref: '#/components/responses/UnexpectedError'
   /quizzes:
@@ -475,20 +500,19 @@ components:
         - chiefProfessor
       properties:
         courseID:
-          description: The TCPC course this class is under
+          description: The ID of the TCPC course this class is under
           type: string
         ID:
-          description: Unique identifier of a class. This property is **deduced**.
+          description: 'Unique identifier of a class. This property is **deduced** by combing the `courseID`, `type` and `componentCode`'
           type: string
         type:
-          description: 'The type of this class, currently *seminar* or *lab*'
+          description: 'The type of this class, currently *seminar* or *lab*. Although no constraints are added.'
           type: string
         componentCode:
           description: Serial number for this component. Defined by the `chiefProfessor`
-          type: integer
-          format: int32
+          type: string
         chiefProfessor:
-          description: The professor managing this class
+          description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`
           type: string
         experts:
           description: The industry experts assigned to this class
@@ -502,9 +526,9 @@ components:
             type: string
       example:
         courseID: AF4912BFBD
-        ID: AF4912BFBDSEM1
+        ID: AF4912BFBD-SEM001
         type: SEM
-        componentCode: 1
+        componentCode: '001'
         chiefProfessor: brian
         experts:
           - stanley
@@ -540,18 +564,22 @@ components:
       title: Project
       description: A project in a TCPC course
       type: object
+      required:
+        - courseID
+        - title
+        - description
       properties:
         courseID:
-          description: The TCPC course this project is under
+          description: The ID of the TCPC course this project is under
           type: string
         ID:
-          description: Unique identifier of a project
+          description: 'Unique identifier of a project, derived from `courseID`.'
           type: string
         title:
-          description: project title
+          description: Project title
           type: string
         description:
-          description: a short description of this project
+          description: A short description of this project
           type: string
         chiefProfessor:
           description: 'The professor managing this project, inherited from the course'
@@ -566,6 +594,19 @@ components:
           type: array
           items:
             type: string
+      example:
+        courseID: AF4912BFBD
+        ID: AF4912BFBD-P1
+        title: Blockchain Application for Small/Medium businesses
+        description: Students are expected to form a group and come up with ideas for business transformation by the Blockchain Technology.
+        chiefProfessor: brian
+        experts:
+          - stanley
+          - peter
+        students:
+          - alice
+          - bob
+          - charlie
     ProjectRecord:
       title: ProjectRecord
       description: A project in a TCPC course
