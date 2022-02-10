@@ -32,6 +32,8 @@ paths:
     $ref: ./resources/quiz/quiz-record.yaml
   /reports/:
     $ref: ./resources/report/reports.yaml
+  /milestone/:
+    $ref: ./resources/milestone/milestones.yaml
   /test/public:
     $ref: ./resources/test/test-public.yaml
   /test/private:
