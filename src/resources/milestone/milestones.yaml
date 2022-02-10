@@ -1,0 +1,17 @@
+post:
+  summary: Create Milestone
+  operationId: createMilestone
+  description: Create a milestone
+  tags:
+    - milestones
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../schemas/Milestone.yaml"
+  responses:
+    '201':
+      $ref : "../../responses/NullResponse.yaml"
+    default:
+      $ref : "../../responses/UnexpectedError.yaml"

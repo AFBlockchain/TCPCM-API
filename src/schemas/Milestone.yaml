@@ -1,0 +1,32 @@
+title: Milestone
+description: A milestone in a TCPC course
+type: object
+required:
+  - courseID
+  - title
+  - description
+  - chiefProfessor
+properties:
+  courseID:
+    type: string
+  ID:
+    type: string
+  title:
+    type: string
+  description:
+    type: string
+  chiefProfessor:
+    type: string
+  students:
+    type: array
+    items:
+      type: string
+example:
+ courseID: AF4912BFBD
+ ID: AF4912BFBDQ3
+ title: Milestone 1
+ description: First Milestone of this course. Very simple.
+ chiefProfessor: brian
+ students:
+  - alice
+  - bob
