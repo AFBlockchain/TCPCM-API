@@ -30,6 +30,8 @@ paths:
     $ref: ./resources/quiz/quiz-records.yaml
   /quiz-records/{quizRecordID}:
     $ref: ./resources/quiz/quiz-record.yaml
+  /reports/:
+    $ref: ./resources/report/reports.yaml
   /test/public:
     $ref: ./resources/test/test-public.yaml
   /test/private:

@@ -1,7 +1,5 @@
-# ref: https://github.com/AFBlockchain/tcpcdapp/blob/main/contracts/src/main/kotlin/hk/edu/polyu/af/bc/tcpc/states/ReportState.kt
-
-title: Report
-description: A Report in a TCPC course
+title: Milestone
+description: A milestone in a TCPC course
 type: object
 required:
   - courseID
@@ -25,9 +23,9 @@ properties:
       type: string
 example:
  courseID: AF4912BFBD
- ID: AF4912BFBDQ2
- title: Report 1
- description: First Reprot of this course. Very simple.
+ ID: AF4912BFBDQ3
+ title: Milestone 1
+ description: First Milestone of this course. Very simple.
  chiefProfessor: brian
  students:
   - alice
