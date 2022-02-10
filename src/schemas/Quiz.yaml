@@ -10,16 +10,22 @@ required:
   - chiefProfessor
 properties:
   courseID:
+    description: The ID of the TCPC course this quiz is under
     type: string
   ID:
+    description: Unique identifier of a quiz, derived from `courseID`.
     type: string
   title:
+    description: Quiz title
     type: string
   description:
+    description: A short description of this quiz
     type: string
   chiefProfessor:
+    description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
     type: string
   students:
+    description: The students assigned to this quiz, inherited from the course
     type: array
     items:
       type: string
