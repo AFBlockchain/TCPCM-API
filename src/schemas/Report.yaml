@@ -10,16 +10,22 @@ required:
   - chiefProfessor
 properties:
   courseID:
+    description: The ID of the TCPC course this reprot is under
     type: string
   ID:
+    description: Unique identifier of a project, derived from `courseID`.
     type: string
   title:
+    description: Report title
     type: string
   description:
+    description: A short description of this report
     type: string
   chiefProfessor:
+    description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
     type: string
   students:
+    description: The students assigned to this report, inherited from the course
     type: array
     items:
       type: string
