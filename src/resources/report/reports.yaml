@@ -2,7 +2,7 @@ post:
   summary: Create Report
   operationId: createReport
   description: Create a report
-  tag:
+  tags:
     - reports
   requestBody:
     required: true
