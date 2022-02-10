@@ -8,16 +8,22 @@ required:
   - chiefProfessor
 properties:
   courseID:
+    escription: The ID of the TCPC course this milestone is under
     type: string
   ID:
+    description: Unique identifier of a milestone, derived from `courseID`.
     type: string
   title:
+    description: Milestone title
     type: string
   description:
+    description: A short description of this milestone
     type: string
   chiefProfessor:
+    description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
     type: string
   students:
+    description: The students assigned to this milestone, inherited from the course
     type: array
     items:
       type: string
