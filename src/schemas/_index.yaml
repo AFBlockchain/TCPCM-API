@@ -16,3 +16,5 @@ Report:
   $ref: ./Report.yaml
 ReportRecord:
   $ref: ./ReportRecord.yaml
+Milestone:
+  $ref: ./Milestone.yaml
