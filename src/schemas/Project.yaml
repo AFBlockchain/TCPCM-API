@@ -7,6 +7,7 @@ required:
   - courseID
   - title
   - description
+  - chiefProfessor
 properties:
   courseID:
     description: The ID of the TCPC course this project is under
@@ -21,7 +22,7 @@ properties:
     description: A short description of this project
     type: string
   chiefProfessor:
-    description: The professor managing this project, inherited from the course
+    description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
     type: string
   experts:
     description: The industry experts assigned to this project, inherited from the course
