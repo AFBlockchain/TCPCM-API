@@ -1,10 +1,21 @@
 type: object
 required:
+  - status
   - code
   - message
 properties:
+  status:
+    description: HTTP response status
+    type: integer
+    format: int32
   code:
+    description: a application-defined error code
     type: integer
     format: int32
   message:
+    description: detailed error information, suitable to be displayed to user
     type: string
+example:
+  status: 422
+  code: 179
+  message: Object with id 'AF4912' already exists.
