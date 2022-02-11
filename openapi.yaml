@@ -148,6 +148,48 @@ paths:
                 $ref: '#/components/schemas/Class'
         default:
           $ref: '#/components/responses/UnexpectedError'
+    patch:
+      summary: Update Class
+      operationId: updateClass
+      description: |
+        Possible updates:
+         1. Account linking by passing in `students`, `experts` and `chiefProfessor`. This change is **propagated** to the parent `Course` of this `Class`.
+      tags:
+        - classes
+      parameters:
+        - name: classID
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                componentCode:
+                  type: string
+                chiefProfessor:
+                  type: string
+                experts:
+                  type: array
+                  items:
+                    type: string
+                students:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: The updated `Class`
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Class'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
   /projects:
     post:
       summary: Create Project
