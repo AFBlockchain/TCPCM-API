@@ -10,7 +10,7 @@ required:
   - chiefProfessor
 properties:
   courseID:
-    description: The ID of the TCPC course this reprot is under
+    description: The ID of the TCPC course this report is under
     type: string
   ID:
     description: Unique identifier of a project, derived from `courseID`.
@@ -31,9 +31,9 @@ properties:
       type: string
 example:
  courseID: AF4912BFBD
- ID: AF4912BFBDQ2
+ ID: AF4912BFBD-R1
  title: Report 1
- description: First Reprot of this course. Very simple.
+ description: First Report
  chiefProfessor: brian
  students:
   - alice

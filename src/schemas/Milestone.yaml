@@ -8,7 +8,7 @@ required:
   - chiefProfessor
 properties:
   courseID:
-    escription: The ID of the TCPC course this milestone is under
+    description: The ID of the TCPC course this milestone is under
     type: string
   ID:
     description: Unique identifier of a milestone, derived from `courseID`.
@@ -29,9 +29,9 @@ properties:
       type: string
 example:
  courseID: AF4912BFBD
- ID: AF4912BFBDQ3
+ ID: AF4912BFBD-M1
  title: Milestone 1
- description: First Milestone of this course. Very simple.
+ description: First Milestone
  chiefProfessor: brian
  students:
   - alice

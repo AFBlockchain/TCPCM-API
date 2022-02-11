@@ -5,7 +5,6 @@ description: A class under a TCPC course
 type: object
 required:
   - courseID
-  - type
   - componentCode
   - chiefProfessor
 properties:
@@ -13,7 +12,7 @@ properties:
     description: The ID of the TCPC course this class is under
     type: string
   ID:
-    description: Unique identifier of a class. This property is **deduced** by combing the `courseID`, `type` and `componentCode`
+    description: Unique identifier of a class. This property is **deduced** by combing the `courseID`, `componentCode`
     type: string
   componentCode:
     description: The component code of a class, same as the system in e-student.

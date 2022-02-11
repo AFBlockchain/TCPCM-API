@@ -31,9 +31,9 @@ properties:
       type: string
 example:
  courseID: AF4912BFBD
- ID: AF4912BFBDQ1
+ ID: AF4912BFBD-Q1
  title: Quiz 1
- description: First Quiz of this course. Very simple.
+ description: First Quiz
  chiefProfessor: brian
  students:
   - alice
