@@ -201,7 +201,11 @@ paths:
               $ref: '#/components/schemas/Quiz'
       responses:
         '201':
-          $ref: '#/components/responses/NullResponse'
+          description: The created quiz (fully populated)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quiz'
         default:
           $ref: '#/components/responses/UnexpectedError'
   '/quizzes/{quizID}':
@@ -311,6 +315,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/QuizRecord'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  /reports/:
+    post:
+      summary: Create Report
+      operationId: createReport
+      description: Create a report
+      tags:
+        - reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Report'
+      responses:
+        '201':
+          description: The created reprot (fully populated)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  /milestone/:
+    post:
+      summary: Create Milestone
+      operationId: createMilestone
+      description: Create a milestone
+      tags:
+        - milestones
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Milestone'
+      responses:
+        '201':
+          description: The created milestone (fully populated)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Milestone'
         default:
           $ref: '#/components/responses/UnexpectedError'
   /test/public:
@@ -495,7 +543,6 @@ components:
       type: object
       required:
         - courseID
-        - type
         - componentCode
         - chiefProfessor
       properties:
@@ -503,7 +550,7 @@ components:
           description: The ID of the TCPC course this class is under
           type: string
         ID:
-          description: 'Unique identifier of a class. This property is **deduced** by combing the `courseID`, `type` and `componentCode`'
+          description: 'Unique identifier of a class. This property is **deduced** by combing the `courseID`, `componentCode`'
           type: string
         componentCode:
           description: 'The component code of a class, same as the system in e-student.'
@@ -564,6 +611,7 @@ components:
         - courseID
         - title
         - description
+        - chiefProfessor
       properties:
         courseID:
           description: The ID of the TCPC course this project is under
@@ -578,7 +626,7 @@ components:
           description: A short description of this project
           type: string
         chiefProfessor:
-          description: 'The professor managing this project, inherited from the course'
+          description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
           type: string
         experts:
           description: 'The industry experts assigned to this project, inherited from the course'
@@ -635,24 +683,30 @@ components:
         - chiefProfessor
       properties:
         courseID:
+          description: The ID of the TCPC course this quiz is under
           type: string
         ID:
+          description: 'Unique identifier of a quiz, derived from `courseID`.'
           type: string
         title:
+          description: Quiz title
           type: string
         description:
+          description: A short description of this quiz
           type: string
         chiefProfessor:
+          description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
           type: string
         students:
+          description: 'The students assigned to this quiz, inherited from the course'
           type: array
           items:
             type: string
       example:
         courseID: AF4912BFBD
-        ID: AF4912BFBDQ1
+        ID: AF4912BFBD-Q1
         title: Quiz 1
-        description: First Quiz of this course. Very simple.
+        description: First Quiz
         chiefProfessor: brian
         students:
           - alice
@@ -683,21 +737,41 @@ components:
       title: Report
       description: A Report in a TCPC course
       type: object
+      required:
+        - courseID
+        - title
+        - description
+        - chiefProfessor
       properties:
         courseID:
+          description: The ID of the TCPC course this report is under
           type: string
         ID:
+          description: 'Unique identifier of a project, derived from `courseID`.'
           type: string
         title:
+          description: Report title
           type: string
         description:
+          description: A short description of this report
           type: string
         chiefProfessor:
+          description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
           type: string
         students:
+          description: 'The students assigned to this report, inherited from the course'
           type: array
           items:
             type: string
+      example:
+        courseID: AF4912BFBD
+        ID: AF4912BFBD-R1
+        title: Report 1
+        description: First Report
+        chiefProfessor: brian
+        students:
+          - alice
+          - bob
     ReportRecord:
       title: ReportRecord
       description: Graded and uploaded record for a report
@@ -713,22 +787,72 @@ components:
           type: string
         grade:
           type: string
+    Milestone:
+      title: Milestone
+      description: A milestone in a TCPC course
+      type: object
+      required:
+        - courseID
+        - title
+        - description
+        - chiefProfessor
+      properties:
+        courseID:
+          description: The ID of the TCPC course this milestone is under
+          type: string
+        ID:
+          description: 'Unique identifier of a milestone, derived from `courseID`.'
+          type: string
+        title:
+          description: Milestone title
+          type: string
+        description:
+          description: A short description of this milestone
+          type: string
+        chiefProfessor:
+          description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
+          type: string
+        students:
+          description: 'The students assigned to this milestone, inherited from the course'
+          type: array
+          items:
+            type: string
+      example:
+        courseID: AF4912BFBD
+        ID: AF4912BFBD-M1
+        title: Milestone 1
+        description: First Milestone
+        chiefProfessor: brian
+        students:
+          - alice
+          - bob
   responses:
     UnexpectedError:
-      description: unexpected error
+      description: Erroneous condition
       content:
         application/json:
           schema:
             type: object
             required:
+              - status
               - code
               - message
             properties:
+              status:
+                description: HTTP response status
+                type: integer
+                format: int32
               code:
+                description: a application-defined error code
                 type: integer
                 format: int32
               message:
+                description: 'detailed error information, suitable to be displayed to user'
                 type: string
+            example:
+              status: 422
+              code: 179
+              message: Object with id 'AF4912' already exists.
     NullResponse:
       description: Null response
   securitySchemes:
