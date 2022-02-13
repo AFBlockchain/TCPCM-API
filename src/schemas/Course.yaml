@@ -7,7 +7,6 @@ required:
   - code
   - title
   - theme
-  - chiefProfessor
   - deputyProfessors
 properties:
   ID:

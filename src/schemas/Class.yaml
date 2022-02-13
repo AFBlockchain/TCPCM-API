@@ -6,7 +6,6 @@ type: object
 required:
   - courseID
   - componentCode
-  - chiefProfessor
 properties:
   courseID:
     description: The ID of the TCPC course this class is under

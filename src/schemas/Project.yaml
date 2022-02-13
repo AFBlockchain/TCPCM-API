@@ -7,7 +7,6 @@ required:
   - courseID
   - title
   - description
-  - chiefProfessor
 properties:
   courseID:
     description: The ID of the TCPC course this project is under

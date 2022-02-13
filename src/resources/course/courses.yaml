@@ -21,6 +21,14 @@ get:
       $ref: "../../responses/UnexpectedError.yaml"
 post:
   summary: Create Course
+  description: |
+    Register a `Course` to the system by supplying its `code`, `title`, `theme`, `deputyProfessors`. The current authenticated user will be the `chiefProfessor`, who must have the required authority. A created course will be returned whose `experts` and `students` remain unspecified.
+    
+    Possible Client-side Exceptions:
+      * Invalid arguments
+      * `courseID` clash
+      * No authority
+        * user is not a professor
   operationId: createCourse
   tags:
     - courses
