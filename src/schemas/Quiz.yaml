@@ -23,17 +23,9 @@ properties:
   chiefProfessor:
     description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
     type: string
-  students:
-    description: The students assigned to this quiz, inherited from the course
-    type: array
-    items:
-      type: string
 example:
  courseID: AF4912BFBD
  ID: AF4912BFBD-Q1
  title: Quiz 1
  description: First Quiz
  chiefProfessor: brian
- students:
-  - alice
-  - bob
