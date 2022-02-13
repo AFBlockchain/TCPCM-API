@@ -211,7 +211,7 @@ paths:
       summary: Create Project
       operationId: createProject
       description: |
-        Register a project under the given course by supplying `courseID`, `title` and `description`. Return the created project with `experts` and `students` unspecified.
+        Register a project under the given course by supplying `courseID`, `title` and `description`. Return the created project.
 
         This operation SHOULD only be carried out after the professor has properly linked students and experts to a course(class), so that in the backend the participation information can be properly propagated to the created project.
 
@@ -258,7 +258,7 @@ paths:
       summary: Create Quiz
       operationId: createQuiz
       description: |
-        Register a quiz under the given course by supplying `courseID`, `title` and `description`. Return the created quiz with `experts` and `students` unspecified.
+        Register a quiz under the given course by supplying `courseID`, `title` and `description`. Return the created quiz.
 
         This operation SHOULD only be carried out after the professor has properly linked students and experts to a course(class), so that in the backend the participation information can be properly propagated to the created quiz.
 
@@ -399,7 +399,7 @@ paths:
       summary: Create Report
       operationId: createReport
       description: |
-        Register a quiz under the given course by supplying `courseID`, `title` and `description`. Return the created report with `experts` and `students` unspecified.
+        Register a quiz under the given course by supplying `courseID`, `title` and `description`. Return the created report.
 
         This operation SHOULD only be carried out after the professor has properly linked students and experts to a course(class), so that in the backend the participation information can be properly propagated to the created report.
 
@@ -712,29 +712,12 @@ components:
         chiefProfessor:
           description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
           type: string
-        experts:
-          description: 'The industry experts assigned to this project, inherited from the course'
-          type: array
-          items:
-            type: string
-        students:
-          description: 'The students assigned to this project, inherited from the course'
-          type: array
-          items:
-            type: string
       example:
         courseID: AF4912BFBD
         ID: AF4912BFBD-P1
         title: Blockchain Application for Small/Medium businesses
         description: Students are expected to form a group and come up with ideas for business transformation by the Blockchain Technology.
         chiefProfessor: brian
-        experts:
-          - stanley
-          - peter
-        students:
-          - alice
-          - bob
-          - charlie
     ProjectRecord:
       title: ProjectRecord
       description: A project in a TCPC course
@@ -780,20 +763,12 @@ components:
         chiefProfessor:
           description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
           type: string
-        students:
-          description: 'The students assigned to this quiz, inherited from the course'
-          type: array
-          items:
-            type: string
       example:
         courseID: AF4912BFBD
         ID: AF4912BFBD-Q1
         title: Quiz 1
         description: First Quiz
         chiefProfessor: brian
-        students:
-          - alice
-          - bob
     QuizRecord:
       title: QuizRecord
       description: Graded record for a quiz
@@ -840,20 +815,12 @@ components:
         chiefProfessor:
           description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
           type: string
-        students:
-          description: 'The students assigned to this report, inherited from the course'
-          type: array
-          items:
-            type: string
       example:
         courseID: AF4912BFBD
         ID: AF4912BFBD-R1
         title: Report 1
         description: First Report
         chiefProfessor: brian
-        students:
-          - alice
-          - bob
     ReportRecord:
       title: ReportRecord
       description: Graded and uploaded record for a report
