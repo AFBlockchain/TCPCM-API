@@ -24,6 +24,14 @@ get:
       $ref: "../../responses/UnexpectedError.yaml"
 post:
   summary: Create class
+  description: |
+    Register a `Class` under the the given `Course` by supplying `courseID` and `componentCode`. Return the created `Class`, `students` and `experts`not specified.
+
+    Exceptions:
+      * Course not found
+      * No authority to register class:
+        * Not a professor
+        * The given course is not managed by the current user
   operationId: createClass
   tags:
     - classes
