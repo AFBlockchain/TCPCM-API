@@ -36,6 +36,14 @@ paths:
           $ref: '#/components/responses/UnexpectedError'
     post:
       summary: Create Course
+      description: |
+        Register a `Course` to the system by supplying its `code`, `title`, `theme`, `deputyProfessors`. The current authenticated user will be the `chiefProfessor`, who must have the required authority. A created course will be returned whose `experts` and `students` remain unspecified.
+
+        Possible Client-side Exceptions:
+          * Invalid arguments
+          * `courseID` clash
+          * No authority
+            * user is not a professor
       operationId: createCourse
       tags:
         - courses
@@ -108,6 +116,14 @@ paths:
           $ref: '#/components/responses/UnexpectedError'
     post:
       summary: Create class
+      description: |
+        Register a `Class` under the the given `Course` by supplying `courseID` and `componentCode`. Return the created `Class`, `students` and `experts`not specified.
+
+        Exceptions:
+          * Course not found
+          * No authority to register class:
+            * Not a professor
+            * The given course is not managed by the current user
       operationId: createClass
       tags:
         - classes
@@ -194,6 +210,15 @@ paths:
     post:
       summary: Create Project
       operationId: createProject
+      description: |
+        Register a project under the given course by supplying `courseID`, `title` and `description`. Return the created project with `experts` and `students` unspecified.
+
+        This operation SHOULD only be carried out after the professor has properly linked students and experts to a course(class), so that in the backend the participation information can be properly propagated to the created project.
+
+        Exceptions:
+          * No authority
+          * Course not found
+          * Invalid arguments
       tags:
         - projects
       requestBody:
@@ -232,7 +257,17 @@ paths:
     post:
       summary: Create Quiz
       operationId: createQuiz
-      description: Create a quiz
+      description: |
+        Register a quiz under the given course by supplying `courseID`, `title` and `description`. Return the created quiz with `experts` and `students` unspecified.
+
+        This operation SHOULD only be carried out after the professor has properly linked students and experts to a course(class), so that in the backend the participation information can be properly propagated to the created quiz.
+
+        This call also automatically creates all "record"s for every student in this course.
+
+        Exceptions:
+          * No authority
+          * Course not found
+          * Invalid arguments
       tags:
         - quizzes
       requestBody:
@@ -363,7 +398,17 @@ paths:
     post:
       summary: Create Report
       operationId: createReport
-      description: Create a report
+      description: |
+        Register a quiz under the given course by supplying `courseID`, `title` and `description`. Return the created report with `experts` and `students` unspecified.
+
+        This operation SHOULD only be carried out after the professor has properly linked students and experts to a course(class), so that in the backend the participation information can be properly propagated to the created report.
+
+        This call also automatically creates all "record"s for every student in this course.
+
+        Exceptions:
+          * No authority
+          * Course not found
+          * Invalid arguments
       tags:
         - reports
       requestBody:
@@ -530,7 +575,6 @@ components:
         - code
         - title
         - theme
-        - chiefProfessor
         - deputyProfessors
       properties:
         ID:
@@ -586,7 +630,6 @@ components:
       required:
         - courseID
         - componentCode
-        - chiefProfessor
       properties:
         courseID:
           description: The ID of the TCPC course this class is under
@@ -653,7 +696,6 @@ components:
         - courseID
         - title
         - description
-        - chiefProfessor
       properties:
         courseID:
           description: The ID of the TCPC course this project is under
@@ -722,7 +764,6 @@ components:
         - courseID
         - title
         - description
-        - chiefProfessor
       properties:
         courseID:
           description: The ID of the TCPC course this quiz is under
@@ -783,7 +824,6 @@ components:
         - courseID
         - title
         - description
-        - chiefProfessor
       properties:
         courseID:
           description: The ID of the TCPC course this report is under
