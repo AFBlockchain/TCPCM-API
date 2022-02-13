@@ -19,7 +19,7 @@ post:
   summary: Create Quiz
   operationId: createQuiz
   description: |
-    Register a quiz under the given course by supplying `courseID`, `title` and `description`. Return the created quiz with `experts` and `students` unspecified.
+    Register a quiz under the given course by supplying `courseID`, `title` and `description`. Return the created quiz.
 
     This operation SHOULD only be carried out after the professor has properly linked students and experts to a course(class), so that in the backend the participation information can be properly propagated to the created quiz.
 

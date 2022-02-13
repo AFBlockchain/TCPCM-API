@@ -23,26 +23,9 @@ properties:
   chiefProfessor:
     description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
     type: string
-  experts:
-    description: The industry experts assigned to this project, inherited from the course
-    type: array
-    items:
-      type: string
-  students:
-    description: The students assigned to this project, inherited from the course
-    type: array
-    items:
-      type: string
 example:
   courseID: AF4912BFBD
   ID: AF4912BFBD-P1
   title: Blockchain Application for Small/Medium businesses
   description: Students are expected to form a group and come up with ideas for business transformation by the Blockchain Technology.
   chiefProfessor: brian
-  experts:
-    - stanley
-    - peter
-  students:
-    - alice
-    - bob
-    - charlie
