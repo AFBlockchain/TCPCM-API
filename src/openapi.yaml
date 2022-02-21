@@ -24,6 +24,10 @@ paths:
     $ref: ./resources/group/groups.yaml
   /projects:
     $ref: ./resources/project/projects.yaml
+  /project-records:
+    $ref: ./resources/project/project-records.yaml
+  /project-record/{projectRecordID}:
+    $ref: ./resources/project/project-record.yaml
   /quizzes:
     $ref: ./resources/quiz/quizzes.yaml
   /quizzes/{quizID}:
