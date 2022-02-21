@@ -9,6 +9,8 @@ required:
   - chiefProfessor
   - experts
   - students
+  - name
+  - note
 properties:
   courseID:
     description: The TCPC course this group is under
@@ -21,21 +23,27 @@ properties:
     type: string
   experts:
     description: The industry experts assigned to this group
-    type: array
-    items:
-      type: string
+    type: string
   students:
     description: The students assigned to this group
     type: array
     items:
       type: string
+  name:
+    description: Name of this group
+    type: string
+  note:
+    description: notice information of a group
+    type: string
+  
 
 example:
   courseID: AF4912BFBD
   ID: AF4912BFBD-group1
+  name: test1
+  note: test group
   chiefProfessor: brian
-  experts:
-    - stanley
+  experts: stanley
   students:
     - alice
     - bob
