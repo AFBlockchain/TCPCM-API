@@ -1,9 +1,12 @@
-# Ref: https://afblockchain.atlassian.net/browse/TCPCM-123
-# Ref: https://github.com/AFBlockchain/tcpcdapp/blob/main/contracts/src/main/kotlin/hk/edu/polyu/af/bc/tcpc/states/GroupState.kt
-
 title: Group
 description: A group in a TCPC course
 type: object
+required:
+  - courseID
+  - name
+  - notes
+  - expert
+  - students
 properties:
   courseID:
     description: The TCPC course this group is under
@@ -11,14 +14,18 @@ properties:
   ID:
     description: Unique identifier of a group
     type: string
+  name:
+    description: Custom group name
+    type: string
+  notes:
+    description: Miscellaneous information about the group
+    type: string
   chiefProfessor:
     description: The professor managing this group
     type: string
-  experts:
-    description: The industry experts assigned to this group
-    type: array
-    items:
-      type: string
+  expert:
+    description: The industry expert assigned to this group
+    type: string
   students:
     description: The students assigned to this group
     type: array

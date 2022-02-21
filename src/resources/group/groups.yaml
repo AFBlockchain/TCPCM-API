@@ -1,0 +1,20 @@
+post:
+  summary: Create Group
+  operationId: createGroup
+  tags:
+    - groups
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../schemas/Group.yaml"
+  responses:
+    '201':
+      description: The created Group (fully populated)
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/Group.yaml"
+    default:
+      $ref : "../../responses/UnexpectedError.yaml"
