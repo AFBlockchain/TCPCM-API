@@ -59,7 +59,7 @@ patch: # may need an `operationID` to distinguish call to this endpoint
           schema:
             type: array
             items:
-              $ref: "../../schemas/projectRecord.yaml"
+              $ref: "../../schemas/ProjectRecord.yaml"
     default:
       $ref: "../../responses/UnexpectedError.yaml"
   
