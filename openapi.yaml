@@ -206,6 +206,27 @@ paths:
                 $ref: '#/components/schemas/Class'
         default:
           $ref: '#/components/responses/UnexpectedError'
+  /groups:
+    post:
+      summary: Create Group
+      operationId: createGroup
+      tags:
+        - groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        '201':
+          description: The created Group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
   /projects:
     post:
       summary: Create Project
@@ -234,6 +255,127 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  /project-records:
+    get:
+      summary: List Project Records
+      operationId: listProjectRecords
+      description: |
+        List project records according to the given query. Notice that only `groupID` is fetched (without `groupName`, which needs another query).
+      tags:
+        - projects
+      parameters:
+        - name: projectID
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of project records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectRecord'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    patch:
+      summary: Batch Grade Project
+      operationId: gradeProjectInBatch
+      description: |
+        Grade projects in batch. The `grader` is the current user. Only `chiefProfessor` of the course and a `ProjectRecord`'s industry supervisor can grade a project.
+      tags:
+        - projects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: projectRecordGradingInBatch
+              type: object
+              required:
+                - gradedRecords
+              properties:
+                gradedRecords:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - projectRecordID
+                      - grade
+                    properties:
+                      projectRecordID:
+                        type: string
+                      grade:
+                        type: string
+      responses:
+        '200':
+          description: a list of graded `ProjectRecord`s
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectRecord'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/project-record/{projectRecordID}':
+    get:
+      summary: Project Record Detail
+      operationId: getProjectRecordByID
+      description: Information for a specific project record
+      tags:
+        - projects
+      parameters:
+        - name: projectRecordID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: the `ProjectRecord`
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectRecord'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    patch:
+      summary: Grade Project
+      operationId: gradeProject
+      description: |
+        Grade a single project record. The `grader` is the current user. Only `chiefProfessor` of the course and a `ProjectRecord`'s industry supervisor can grade a project.
+      tags:
+        - projects
+      parameters:
+        - name: projectRecordID
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: projectRecordGradingPatch
+              type: object
+              required:
+                - grade
+              properties:
+                grade:
+                  type: string
+      responses:
+        '200':
+          description: the graded `ProjectRecord`
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectRecord'
         default:
           $ref: '#/components/responses/UnexpectedError'
   /quizzes:
@@ -668,6 +810,12 @@ components:
       title: Group
       description: A group in a TCPC course
       type: object
+      required:
+        - courseID
+        - name
+        - notes
+        - expert
+        - students
       properties:
         courseID:
           description: The TCPC course this group is under
@@ -675,14 +823,18 @@ components:
         ID:
           description: Unique identifier of a group
           type: string
+        name:
+          description: Custom group name
+          type: string
+        notes:
+          description: Miscellaneous information about the group
+          type: string
         chiefProfessor:
           description: The professor managing this group
           type: string
-        experts:
-          description: The industry experts assigned to this group
-          type: array
-          items:
-            type: string
+        expert:
+          description: The industry expert assigned to this group
+          type: string
         students:
           description: The students assigned to this group
           type: array
@@ -720,12 +872,18 @@ components:
         chiefProfessor: brian
     ProjectRecord:
       title: ProjectRecord
-      description: A project in a TCPC course
+      description: |
+        A record for a TCPC project. A record is instantiated for every group for every project. A project is graded on a group basis. Grades (`gradeByProfessor`, `gradeByExpert`) will be `null` if not present.
       type: object
+      required:
+        - projectID
+        - groupID
       properties:
         projectID:
           type: string
         groupID:
+          type: string
+        ID:
           type: string
         gradeByProfessor:
           type: string
