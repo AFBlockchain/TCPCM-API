@@ -22,3 +22,44 @@ get:
               $ref: "../../schemas/projectRecord.yaml"
     default:
       $ref: "../../responses/UnexpectedError.yaml"
+patch: # may need an `operationID` to distinguish call to this endpoint
+  summary: Batch grade project
+  operationId: gradeProjectInBatch
+  description: |
+    Grade projects in batch. The `grader` is the current user. Only `chiefProfessor` of the course and a `ProjectRecord`'s industry supervisor can grade a project.
+  tags:
+    - projects
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          title: projectRecordGradingInBatch
+          type: object
+          required:
+            - gradedRecords
+          properties:
+            gradedRecords:
+              type: array
+              items:
+                type: object
+                required:
+                  - projectRecordID
+                  - grade
+                properties:
+                  projectRecordID:
+                    type: string
+                  grade:
+                    type: string
+  responses:
+    '200':
+      description: a list of graded `ProjectRecord`s
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../schemas/projectRecord.yaml"
+    default:
+      $ref: "../../responses/UnexpectedError.yaml"
+  
