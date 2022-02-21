@@ -20,7 +20,7 @@ get:
     default:
       $ref: "../../responses/UnexpectedError.yaml"
 patch:
-  summary: Grade project
+  summary: Grade Project
   operationId: gradeProject
   description: |
     Grade a single project record. The `grader` is the current user. Only `chiefProfessor` of the course and a `ProjectRecord`'s industry supervisor can grade a project.

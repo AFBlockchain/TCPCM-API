@@ -11,7 +11,7 @@ post:
           $ref: "../../schemas/Group.yaml"
   responses:
     '201':
-      description: The created Group (fully populated)
+      description: The created Group
       content:
         application/json:
           schema:

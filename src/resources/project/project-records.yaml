@@ -1,5 +1,5 @@
 get:
-  summary: List project Records
+  summary: List Project Records
   operationId: listProjectRecords
   description: |
     List project records according to the given query. Notice that only `groupID` is fetched (without `groupName`, which needs another query).
@@ -23,7 +23,7 @@ get:
     default:
       $ref: "../../responses/UnexpectedError.yaml"
 patch: # may need an `operationID` to distinguish call to this endpoint
-  summary: Batch grade project
+  summary: Batch Grade Project
   operationId: gradeProjectInBatch
   description: |
     Grade projects in batch. The `grader` is the current user. Only `chiefProfessor` of the course and a `ProjectRecord`'s industry supervisor can grade a project.
