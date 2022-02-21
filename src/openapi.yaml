@@ -34,6 +34,8 @@ paths:
     $ref: ./resources/report/reports.yaml
   /milestone/:
     $ref: ./resources/milestone/milestones.yaml
+  /group/:
+    $ref: ./resources/group/group.yaml
   /test/public:
     $ref: ./resources/test/test-public.yaml
   /test/private:

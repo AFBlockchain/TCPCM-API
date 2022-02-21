@@ -4,6 +4,11 @@
 title: Group
 description: A group in a TCPC course
 type: object
+required:
+  - courseID
+  - chiefProfessor
+  - experts
+  - students
 properties:
   courseID:
     description: The TCPC course this group is under
@@ -24,3 +29,14 @@ properties:
     type: array
     items:
       type: string
+
+example:
+  courseID: AF4912BFBD
+  ID: AF4912BFBD-group1
+  chiefProfessor: brian
+  experts:
+    - stanley
+  students:
+    - alice
+    - bob
+    - alex
