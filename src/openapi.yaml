@@ -10,12 +10,16 @@ info:
     url: http://www.example.com/support
     email: support@example.com
 servers:
-  - url: http://ec2-54-165-183-53.compute-1.amazonaws.com:8080
+  - url: http://10.13.46.31:8888
 paths:
   /courses:
     $ref: ./resources/course/courses.yaml
   /courses/{courseID}:
     $ref: ./resources/course/course.yaml
+  /course-records/:
+    $ref: ./resources/course/course-records.yaml
+  /course-records/{courseRecordID}:
+    $ref: ./resources/course/course-record.yaml
   /classes:
     $ref: ./resources/clazz/classes.yaml
   /classes/{classID}:
@@ -26,7 +30,7 @@ paths:
     $ref: ./resources/project/projects.yaml
   /project-records:
     $ref: ./resources/project/project-records.yaml
-  /project-record/{projectRecordID}:
+  /project-records/{projectRecordID}:
     $ref: ./resources/project/project-record.yaml
   /quizzes:
     $ref: ./resources/quiz/quizzes.yaml
