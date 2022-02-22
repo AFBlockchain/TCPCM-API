@@ -1,15 +1,14 @@
-# Ref: https://github.com/AFBlockchain/tcpcdapp/blob/main/contracts/src/main/kotlin/hk/edu/polyu/af/bc/tcpc/states/QuizRecordState.kt
-
 title: QuizRecord
-description: Graded record for a quiz
+description: |
+  Graded record for a quiz. A record can only be graded by the course `chiefProfessor`.
 type: object
 properties:
   ID:
     type: string
-    description: This ID is for system book-keeping and not used directly by the end users.
+    description: This ID is in `UUID` format and is for system book-keeping and not exposed to the end user.
   quizID:
     type: string
-  grader:
+  chiefProfessor:
     type: string
   student:
     type: string
@@ -17,8 +16,8 @@ properties:
     type: string
 example:
   ID: F9E52CBC-AC07-4B06-ABF9-46EE0C9F3EE1
-  quizID: AF4912BFBDQ1
-  grader: brian
+  quizID: AF4912BFBD-Q1
+  chiefProfessor: brian
   student: alice
   grade: A+
   
