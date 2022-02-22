@@ -1,0 +1,54 @@
+get:
+  summary: Report Record Detail
+  operationId: getReportRecordByID
+  description: Information for a specific report record.
+  tags:
+    - reports
+  parameters:
+    - name: reportRecordID
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: The requested report record.
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/ReportRecord.yaml"
+    default:
+      $ref: "../../responses/UnexpectedError.yaml"
+patch:
+  summary: Grade Report
+  operationId: gradeReport
+  description: Grade a single report record. The grader is the current user who must be the `chiefProfessor`.
+  tags:
+    - reports
+  parameters:
+    - name: reportRecordID
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          title: ReportRecordGradingPatch
+          type: object
+          required:
+            - grade
+          properties:
+            grade:
+              type: string
+  responses:
+    '200':
+      description: The graded report record
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/ReportRecord.yaml"
+    default:
+      $ref: "../../responses/UnexpectedError.yaml"

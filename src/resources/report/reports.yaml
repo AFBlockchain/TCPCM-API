@@ -22,7 +22,7 @@ post:
           $ref: "../../schemas/Report.yaml"
   responses:
     '201':
-      description: The created reprot (fully populated)
+      description: The created report (fully populated)
       content:
         application/json:
           schema:

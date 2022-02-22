@@ -1,0 +1,56 @@
+get:
+  summary: List Report Records
+  operationId: listReportRecords
+  description: List report records according to the given query
+  tags:
+    - reports
+  parameters:
+    - name: reportID
+      in: query
+      required: false
+      schema:
+        type: string
+  responses:
+    '200':
+      description: An array of report records
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../schemas/ReportRecord.yaml"
+    default:
+      $ref: "../../responses/UnexpectedError.yaml"
+patch:
+  summary: Grade Report in Batch
+  operationId: gradeReportBatch
+  description: Grade report records in batch size.
+  tags:
+    - reports
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          title: ReportRecordGradingBatch
+          type: array
+          items:
+            type: object
+            required:
+              - reportRecordID
+              - grade
+            properties:
+              reportRecordID:
+                type: string
+              grade:
+                type: string
+  responses:
+    '200':
+      description: The list of graded report records.
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/ReportRecord.yaml"
+    default:
+      $ref: "../../responses/UnexpectedError.yaml"
+  

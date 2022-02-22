@@ -1,12 +1,15 @@
-# Ref: https://github.com/AFBlockchain/tcpcdapp/blob/main/contracts/src/main/kotlin/hk/edu/polyu/af/bc/tcpc/states/ReportRecordState.kt
-
 title: ReportRecord
-description: Graded and uploaded record for a report
+description: Gradable and uploadable record for a report
 type: object
 properties:
+  ID:
+    type: string
+    description: A `uuid` for system book-keeping.
   reportID:
     type: string
+    description: The `Report` this record is for.
   sha256Checksum:
+    description: The `SHA256` hash of the file for the student's report.
     type: string
   chiefProfessor:
     type: string
