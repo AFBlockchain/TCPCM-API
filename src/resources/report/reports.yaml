@@ -1,3 +1,25 @@
+get:
+  summary: List Reports
+  operationId: listReports
+  description: List reports according to the given query
+  tags:
+    - reports
+  parameters:
+    - name: chiefProfessor
+      in: query
+      required: false
+      schema:
+        type: string
+  responses:
+    '200':
+      description: An array of reports
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/Report.yaml"
+    default:
+      $ref: "../../responses/UnexpectedError.yaml"
+
 post:
   summary: Create Report
   operationId: createReport
