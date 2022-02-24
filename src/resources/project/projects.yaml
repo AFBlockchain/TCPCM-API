@@ -1,3 +1,25 @@
+get:
+  summary: List Projects
+  operationId: listProjects
+  description: List projects according to the given query
+  tags:
+    - projects
+  parameters:
+    - name: chiefProfessor
+      in: query
+      required: false
+      schema:
+        type: string
+  responses:
+    '200':
+      description: An array of projects
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/Project.yaml"
+    default:
+      $ref: "../../responses/UnexpectedError.yaml"
+
 post:
   summary: Create Project
   operationId: createProject
