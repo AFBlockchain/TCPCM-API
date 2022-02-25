@@ -5,7 +5,7 @@ get:
   tags:
     - reports
   parameters:
-    - name: chiefProfessor
+    - name: reportID
       in: query
       required: false
       schema:
