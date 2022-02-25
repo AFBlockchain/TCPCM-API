@@ -5,7 +5,7 @@ get:
   tags:
     - projects
   parameters:
-    - name: chiefProfessor
+    - name: projectID
       in: query
       required: false
       schema:
