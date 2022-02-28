@@ -6,6 +6,8 @@ required:
   - projectID
   - groupID
 properties:
+  groupName:
+    type: string
   projectID:
     type: string
   groupID:
