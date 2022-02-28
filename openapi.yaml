@@ -359,6 +359,27 @@ paths:
         default:
           $ref: '#/components/responses/UnexpectedError'
   /projects:
+    get:
+      summary: List Projects
+      operationId: listProjects
+      description: List projects according to the given query
+      tags:
+        - projects
+      parameters:
+        - name: projectID
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of projects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
     post:
       summary: Create Project
       operationId: createProject
@@ -692,6 +713,27 @@ paths:
         default:
           $ref: '#/components/responses/UnexpectedError'
   /reports/:
+    get:
+      summary: List Reports
+      operationId: listReports
+      description: List reports according to the given query
+      tags:
+        - reports
+      parameters:
+        - name: reportID
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of reports
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
     post:
       summary: Create Report
       operationId: createReport
@@ -1145,6 +1187,8 @@ components:
         - projectID
         - groupID
       properties:
+        groupName:
+          type: string
         projectID:
           type: string
         groupID:
