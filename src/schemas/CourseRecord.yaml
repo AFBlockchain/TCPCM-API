@@ -2,8 +2,9 @@ title: CourseRecord
 description: The record for the overall course performance.
 type: object
 properties:
-  ID:
-    type: string
+  id:
+    type: integer
+    format: int64
     description: A unique identifier
   courseID:
     type: string

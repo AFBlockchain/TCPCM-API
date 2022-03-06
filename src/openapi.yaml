@@ -20,10 +20,6 @@ paths:
     $ref: ./resources/course/course-records.yaml
   /course-records/{courseRecordID}:
     $ref: ./resources/course/course-record.yaml
-  /classes:
-    $ref: ./resources/clazz/classes.yaml
-  /classes/{classID}:
-    $ref: ./resources/clazz/class.yaml
   /groups:
     $ref: ./resources/group/groups.yaml
   /projects:

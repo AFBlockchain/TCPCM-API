@@ -3,7 +3,6 @@ description: A TCPC Course
 type: object
 required:
   - code
-  - title
   - theme
 properties:
   id:
