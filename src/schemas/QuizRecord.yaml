@@ -8,8 +8,6 @@ properties:
     description: This ID is in `UUID` format and is for system book-keeping and not exposed to the end user.
   quizID:
     type: string
-  chiefProfessor:
-    type: string
   student:
     type: string
   grade:
@@ -17,7 +15,6 @@ properties:
 example:
   ID: F9E52CBC-AC07-4B06-ABF9-46EE0C9F3EE1
   quizID: AF4912BFBD-Q1
-  chiefProfessor: brian
   student: alice
   grade: A+
   

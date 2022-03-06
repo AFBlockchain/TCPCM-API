@@ -20,9 +20,6 @@ properties:
   notes:
     description: Miscellaneous information about the group
     type: string
-  chiefProfessor:
-    description: The professor managing this group
-    type: string
   expert:
     description: The industry expert assigned to this group
     type: string

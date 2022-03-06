@@ -4,19 +4,15 @@ type: object
 properties:
   ID:
     type: string
-    description: A `UUID` identifier.
+    description: A unique identifier
   courseID:
-    type: string
-  chiefProfessor:
     type: string
   student:
     type: string
   grade:
     type: string
 example:
-  ID: F9E52CBC-AC07-4B06-ABF9-46EE0C9F3EE1
+  ID: 5
   courseID: AF4912BFBD
-  chiefProfessor: brian
   student: alice
   grade: A+
-  
