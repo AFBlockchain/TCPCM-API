@@ -22,28 +22,28 @@ get:
     default:
       $ref: "../../responses/UnexpectedError.yaml"
 patch:
-  summary: Grade Course in Batch
-  operationId: gradeCourseBatch
+  summary: Grade Courses
+  operationId: gradeCourses
   description: Grade course records in batch size.
   tags:
     - courses
+  parameters:
+    - in: query
+      name: courseId
+      schema:
+        type: string
+      required: true
+      description: The course under grading.
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          title: CourseRecordGradingBatch
+          title: CourseRecordGradings
           type: array
           items:
             type: object
-            required:
-              - courseRecordID
-              - grade
-            properties:
-              courseRecordID:
-                type: string
-              grade:
-                type: string
+            $ref: ../../schemas/Grading.yaml
   responses:
     '200':
       description: The list of graded course records.
