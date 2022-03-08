@@ -16,7 +16,9 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../schemas/Course.yaml"
+            type: array
+            items:
+              $ref: "../../schemas/Course.yaml"
     default:
       $ref: "../../responses/UnexpectedError.yaml"
 post:
