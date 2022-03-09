@@ -109,28 +109,41 @@ paths:
         default:
           $ref: '#/components/responses/UnexpectedError'
     patch:
-      summary: Grade Course in Batch
-      operationId: gradeCourseBatch
+      summary: Grade Courses
+      operationId: gradeCourses
       description: Grade course records in batch size.
       tags:
         - courses
+      parameters:
+        - in: query
+          name: courseId
+          schema:
+            type: string
+          required: true
+          description: The course under grading.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              title: CourseRecordGradingBatch
+              title: CourseRecordGradings
               type: array
               items:
                 type: object
                 required:
-                  - courseRecordID
+                  - id
                   - grade
                 properties:
-                  courseRecordID:
-                    type: string
+                  id:
+                    description: Id of the graded record
+                    type: integer
+                    format: int64
                   grade:
+                    description: The grade
                     type: string
+                example:
+                  id: 132
+                  grade: A
       responses:
         '200':
           description: The list of graded course records.
@@ -141,21 +154,19 @@ paths:
                 description: The record for the overall course performance.
                 type: object
                 properties:
-                  ID:
-                    type: string
-                    description: A `UUID` identifier.
+                  id:
+                    type: integer
+                    format: int64
+                    description: A unique identifier
                   courseID:
-                    type: string
-                  chiefProfessor:
                     type: string
                   student:
                     type: string
                   grade:
                     type: string
                 example:
-                  ID: F9E52CBC-AC07-4B06-ABF9-46EE0C9F3EE1
+                  ID: 5
                   courseID: AF4912BFBD
-                  chiefProfessor: brian
                   student: alice
                   grade: A+
         default:
@@ -180,161 +191,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/paths/~1course-records~1/patch/responses/200/content/application~1json/schema'
-        default:
-          $ref: '#/components/responses/UnexpectedError'
-    patch:
-      summary: Grade Course
-      operationId: gradeCourse
-      description: Grade a single course record. The grader is the current user who must be the `chiefProfessor`.
-      tags:
-        - courses
-      parameters:
-        - name: courseRecordID
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              title: CourseRecordGradingPatch
-              type: object
-              required:
-                - grade
-              properties:
-                grade:
-                  type: string
-      responses:
-        '200':
-          description: The graded course record
-          content:
-            application/json:
-              schema:
-                $ref: '#/paths/~1course-records~1/patch/responses/200/content/application~1json/schema'
-        default:
-          $ref: '#/components/responses/UnexpectedError'
-  /classes:
-    get:
-      summary: List Classes
-      operationId: listClasses
-      description: List classes according to the given query
-      tags:
-        - classes
-      parameters:
-        - name: courseID
-          in: query
-          description: top level courseID
-          required: false
-          schema:
-            type: string
-        - name: chiefProfessor
-          in: query
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          description: An array of classes
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Class'
-        default:
-          $ref: '#/components/responses/UnexpectedError'
-    post:
-      summary: Create class
-      description: |
-        Register a `Class` under the the given `Course` by supplying `courseID` and `componentCode`. Return the created `Class`, `students` and `experts`not specified.
-
-        Exceptions:
-          * Course not found
-          * No authority to register class:
-            * Not a professor
-            * The given course is not managed by the current user
-      operationId: createClass
-      tags:
-        - classes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Class'
-      responses:
-        '201':
-          description: The created class (fully populated)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Course'
-        default:
-          $ref: '#/components/responses/UnexpectedError'
-  '/classes/{classID}':
-    get:
-      summary: Class Detail
-      operationId: getClassById
-      description: Information for a specific class
-      tags:
-        - classes
-      parameters:
-        - name: classID
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Expected response to a valid request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Class'
-        default:
-          $ref: '#/components/responses/UnexpectedError'
-    patch:
-      summary: Update Class
-      operationId: updateClass
-      description: |
-        Possible updates:
-         1. Account linking by passing in `students`, `experts` and `chiefProfessor`. This change is **propagated** to the parent `Course` of this `Class`.
-      tags:
-        - classes
-      parameters:
-        - name: classID
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                componentCode:
-                  type: string
-                chiefProfessor:
-                  type: string
-                experts:
-                  type: array
-                  items:
-                    type: string
-                students:
-                  type: array
-                  items:
-                    type: string
-      responses:
-        '200':
-          description: The updated `Class`
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Class'
         default:
           $ref: '#/components/responses/UnexpectedError'
   /groups:
@@ -538,7 +394,12 @@ paths:
       tags:
         - quizzes
       parameters:
-        - $ref: '#/paths/~1classes/get/parameters/0'
+        - name: courseID
+          in: query
+          description: top level courseID
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: An array of quizzes
@@ -1023,30 +884,20 @@ components:
       type: object
       required:
         - code
-        - title
         - theme
-        - deputyProfessors
       properties:
-        ID:
+        id:
           description: 'Unique identifier of a course across the platform. It is derived from the supplied `code` and `theme`. Later, `year` may also be incorporated.'
           type: string
         code:
           description: 'The subject code. For Capstone Course in AF, this is AF4912.'
           type: string
-        title:
-          description: 'The subject title, normally "Capstone Project Course"'
-          type: string
         theme:
           description: Course theme
           type: string
-        chiefProfessor:
+        professor:
           description: The user (professor who manages this course)
           type: string
-        deputyProfessors:
-          description: Other professors than the `chiefProfessor` teaching this course
-          type: array
-          items:
-            type: string
         experts:
           description: The industry experts sponsoring this course
           type: array
@@ -1058,14 +909,10 @@ components:
           items:
             type: string
       example:
-        ID: AF4912BFBD
+        id: AF4912BFBD
         code: AF4912
-        title: Capstone Project Course
         theme: Blockchain for Business Digitization
-        chiefProfessor: brian
-        deputyProfessors:
-          - brian
-          - jimmy
+        professor: brian
         experts:
           - peter
           - stanley
@@ -1073,47 +920,6 @@ components:
           - alice
           - bob
           - charlie
-    Class:
-      title: Class
-      description: A class under a TCPC course
-      type: object
-      required:
-        - courseID
-        - componentCode
-      properties:
-        courseID:
-          description: The ID of the TCPC course this class is under
-          type: string
-        ID:
-          description: 'Unique identifier of a class. This property is **deduced** by combing the `courseID`, `componentCode`'
-          type: string
-        componentCode:
-          description: 'The component code of a class, same as the system in e-student.'
-          type: string
-        chiefProfessor:
-          description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`
-          type: string
-        experts:
-          description: The industry experts assigned to this class
-          type: array
-          items:
-            type: string
-        students:
-          description: The students assigned to this class
-          type: array
-          items:
-            type: string
-      example:
-        courseID: AF4912BFBD
-        ID: AF4912BFBD-SEM001
-        componentCode: SEM001
-        chiefProfessor: brian
-        experts:
-          - stanley
-          - peter
-        students:
-          - alice
-          - bob
     Group:
       title: Group
       description: A group in a TCPC course
@@ -1137,9 +943,6 @@ components:
         notes:
           description: Miscellaneous information about the group
           type: string
-        chiefProfessor:
-          description: The professor managing this group
-          type: string
         expert:
           description: The industry expert assigned to this group
           type: string
@@ -1153,14 +956,14 @@ components:
       description: A project in a TCPC course
       type: object
       required:
-        - courseID
+        - courseId
         - title
         - description
       properties:
-        courseID:
+        courseId:
           description: The ID of the TCPC course this project is under
           type: string
-        ID:
+        id:
           description: 'Unique identifier of a project, derived from `courseID`.'
           type: string
         title:
@@ -1169,15 +972,11 @@ components:
         description:
           description: A short description of this project
           type: string
-        chiefProfessor:
-          description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
-          type: string
       example:
-        courseID: AF4912BFBD
-        ID: AF4912BFBD-P1
+        courseId: AF4912BFBD
+        id: AF4912BFBD-P1
         title: Blockchain Application for Small/Medium businesses
         description: Students are expected to form a group and come up with ideas for business transformation by the Blockchain Technology.
-        chiefProfessor: brian
     ProjectRecord:
       title: ProjectRecord
       description: |
@@ -1199,8 +998,6 @@ components:
           type: string
         gradeByExpert:
           type: string
-        chiefProfessor:
-          type: string
         expert:
           type: string
         students:
@@ -1212,15 +1009,15 @@ components:
       description: A quiz in a TCPC course
       type: object
       required:
-        - courseID
+        - courseId
         - title
         - description
       properties:
-        courseID:
+        courseId:
           description: The ID of the TCPC course this quiz is under
           type: string
-        ID:
-          description: 'Unique identifier of a quiz, derived from `courseID`.'
+        id:
+          description: 'Unique identifier of a quiz, derived from `courseId`.'
           type: string
         title:
           description: Quiz title
@@ -1228,15 +1025,11 @@ components:
         description:
           description: A short description of this quiz
           type: string
-        chiefProfessor:
-          description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
-          type: string
       example:
-        courseID: AF4912BFBD
-        ID: AF4912BFBD-Q1
+        courseId: AF4912BFBD
+        id: AF4912BFBD-Q1
         title: Quiz 1
         description: First Quiz
-        chiefProfessor: brian
     QuizRecord:
       title: QuizRecord
       description: |
@@ -1248,8 +1041,6 @@ components:
           description: This ID is in `UUID` format and is for system book-keeping and not exposed to the end user.
         quizID:
           type: string
-        chiefProfessor:
-          type: string
         student:
           type: string
         grade:
@@ -1257,22 +1048,20 @@ components:
       example:
         ID: F9E52CBC-AC07-4B06-ABF9-46EE0C9F3EE1
         quizID: AF4912BFBD-Q1
-        chiefProfessor: brian
         student: alice
         grade: A+
     Report:
-      title: Report
       description: A Report in a TCPC course
       type: object
       required:
-        - courseID
+        - courseId
         - title
         - description
       properties:
-        courseID:
+        courseId:
           description: The ID of the TCPC course this report is under
           type: string
-        ID:
+        id:
           description: 'Unique identifier of a project, derived from `courseID`.'
           type: string
         title:
@@ -1281,15 +1070,11 @@ components:
         description:
           description: A short description of this report
           type: string
-        chiefProfessor:
-          description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
-          type: string
       example:
-        courseID: AF4912BFBD
-        ID: AF4912BFBD-R1
+        courseId: AF4912BFBD
+        id: AF4912BFBD-R1
         title: Report 1
         description: First Report
-        chiefProfessor: brian
     ReportRecord:
       title: ReportRecord
       description: Gradable and uploadable record for a report
@@ -1303,8 +1088,6 @@ components:
           description: The `Report` this record is for.
         sha256Checksum:
           description: The `SHA256` hash of the file for the student's report.
-          type: string
-        chiefProfessor:
           type: string
         student:
           type: string
