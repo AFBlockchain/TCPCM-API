@@ -1,11 +1,13 @@
 get:
   summary: List Projects
   operationId: listProjects
-  description: List projects according to the given query
+  description: | 
+    List projects according to the given query. Available queries:
+      1. By courseId
   tags:
     - projects
   parameters:
-    - name: projectID
+    - name: courseId
       in: query
       required: false
       schema:
