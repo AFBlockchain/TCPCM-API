@@ -2,16 +2,16 @@ title: Group
 description: A group in a TCPC course
 type: object
 required:
-  - courseID
+  - courseId
   - name
   - notes
   - expert
   - students
 properties:
-  courseID:
+  courseId:
     description: The TCPC course this group is under
     type: string
-  ID:
+  id:
     description: Unique identifier of a group
     type: string
   name:
