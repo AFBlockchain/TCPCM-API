@@ -14,7 +14,7 @@ servers:
 paths:
   /courses:
     $ref: ./resources/course/courses.yaml
-  /courses/{courseID}:
+  /courses/{courseId}:
     $ref: ./resources/course/course.yaml
   /course-records/:
     $ref: ./resources/course/course-records.yaml

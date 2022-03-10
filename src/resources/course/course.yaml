@@ -5,7 +5,7 @@ get:
   tags:
     - courses
   parameters:
-    - name: courseID
+    - name: courseId
       in: path
       required: true
       schema:
@@ -19,3 +19,33 @@ get:
             $ref: "../../schemas/Course.yaml"
     default:
       $ref: "../../responses/UnexpectedError.yaml"
+patch:
+  summary: Update a course
+  operationId: updateCourses
+  description: |
+    Possible updates:
+      1. Link accounts: specify `experts` and `students`
+  tags:
+    - courses
+  parameters:
+    - name: courseId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../schemas/Course.yaml"
+  responses:
+    '200':
+      description: The updated course
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/Course.yaml"
+    default:
+      $ref: "../../responses/UnexpectedError.yaml"
+  
