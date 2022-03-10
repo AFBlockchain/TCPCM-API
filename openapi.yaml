@@ -62,7 +62,7 @@ paths:
                 $ref: '#/components/schemas/Course'
         default:
           $ref: '#/components/responses/UnexpectedError'
-  '/courses/{courseID}':
+  '/courses/{courseId}':
     get:
       summary: Course Detail
       operationId: getCourseById
@@ -70,7 +70,7 @@ paths:
       tags:
         - courses
       parameters:
-        - name: courseID
+        - name: courseId
           in: path
           required: true
           schema:
@@ -78,6 +78,35 @@ paths:
       responses:
         '200':
           description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    patch:
+      summary: Update a course
+      operationId: updateCourses
+      description: |
+        Possible updates:
+          1. Link accounts: specify `experts` and `students`
+      tags:
+        - courses
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+      responses:
+        '200':
+          description: The updated course
           content:
             application/json:
               schema:
@@ -925,16 +954,16 @@ components:
       description: A group in a TCPC course
       type: object
       required:
-        - courseID
+        - courseId
         - name
         - notes
         - expert
         - students
       properties:
-        courseID:
+        courseId:
           description: The TCPC course this group is under
           type: string
-        ID:
+        id:
           description: Unique identifier of a group
           type: string
         name:
