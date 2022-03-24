@@ -19,36 +19,36 @@ get:
             $ref: "../../schemas/CourseRecord.yaml"
     default:
       $ref: "../../responses/UnexpectedError.yaml"
-patch:
-  summary: Grade Course
-  operationId: gradeCourse
-  description: Grade a single course record. The grader is the current user who must be the `chiefProfessor`.
-  tags:
-    - courses
-  parameters:
-    - name: courseRecordID
-      in: path
-      required: true
-      schema:
-        type: string
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          title: CourseRecordGradingPatch
-          type: object
-          required:
-            - grade
-          properties:
-            grade:
-              type: string
-  responses:
-    '200':
-      description: The graded course record
-      content:
-        application/json:
-          schema:
-            $ref: "../../schemas/CourseRecord.yaml"
-    default:
-      $ref: "../../responses/UnexpectedError.yaml"
+# patch:
+#   summary: Grade Course
+#   operationId: gradeCourse
+#   description: Grade a single course record. The grader is the current user who must be the `chiefProfessor`.
+#   tags:
+#     - courses
+#   parameters:
+#     - name: courseRecordID
+#       in: path
+#       required: true
+#       schema:
+#         type: string
+#   requestBody:
+#     required: true
+#     content:
+#       application/json:
+#         schema:
+#           title: CourseRecordGradingPatch
+#           type: object
+#           required:
+#             - grade
+#           properties:
+#             grade:
+#               type: string
+#   responses:
+#     '200':
+#       description: The graded course record
+#       content:
+#         application/json:
+#           schema:
+#             $ref: "../../schemas/CourseRecord.yaml"
+#     default:
+#       $ref: "../../responses/UnexpectedError.yaml"

@@ -1,17 +1,14 @@
-# ref: https://github.com/AFBlockchain/tcpcdapp/blob/main/contracts/src/main/kotlin/hk/edu/polyu/af/bc/tcpc/states/ReportState.kt
-
-title: Report
 description: A Report in a TCPC course
 type: object
 required:
-  - courseID
+  - courseId
   - title
   - description
 properties:
-  courseID:
+  courseId:
     description: The ID of the TCPC course this report is under
     type: string
-  ID:
+  id:
     description: Unique identifier of a project, derived from `courseID`.
     type: string
   title:
@@ -20,12 +17,8 @@ properties:
   description:
     description: A short description of this report
     type: string
-  chiefProfessor:
-    description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
-    type: string
 example:
- courseID: AF4912BFBD
- ID: AF4912BFBD-R1
+ courseId: AF4912BFBD
+ id: AF4912BFBD-R1
  title: Report 1
  description: First Report
- chiefProfessor: brian

@@ -4,15 +4,15 @@ title: Quiz
 description: A quiz in a TCPC course
 type: object
 required:
-  - courseID
+  - courseId
   - title
   - description
 properties:
-  courseID:
+  courseId:
     description: The ID of the TCPC course this quiz is under
     type: string
-  ID:
-    description: Unique identifier of a quiz, derived from `courseID`.
+  id:
+    description: Unique identifier of a quiz, derived from `courseId`.
     type: string
   title:
     description: Quiz title
@@ -20,12 +20,8 @@ properties:
   description:
     description: A short description of this quiz
     type: string
-  chiefProfessor:
-    description: The professor managing this class. Should be the same as the `chiefProfessor` from the parent `Course`.
-    type: string
 example:
- courseID: AF4912BFBD
- ID: AF4912BFBD-Q1
+ courseId: AF4912BFBD
+ id: AF4912BFBD-Q1
  title: Quiz 1
  description: First Quiz
- chiefProfessor: brian

@@ -1,34 +1,22 @@
-# Ref: https://github.com/AFBlockchain/tcpcdapp/blob/main/contracts/src/main/kotlin/hk/edu/polyu/af/bc/tcpc/states/CourseState.kt
-
 title: Course
 description: A TCPC Course
 type: object
 required:
   - code
-  - title
   - theme
-  - deputyProfessors
 properties:
-  ID:
+  id:
     description: Unique identifier of a course across the platform. It is derived from the supplied `code` and `theme`. Later, `year` may also be incorporated.
     type: string
   code:
     description: The subject code. For Capstone Course in AF, this is AF4912.
     type: string
-  title: 
-    description: The subject title, normally "Capstone Project Course"
-    type: string
   theme:
     description: Course theme
     type: string
-  chiefProfessor:
+  professor:
     description: The user (professor who manages this course)
     type: string
-  deputyProfessors:
-    description: Other professors than the `chiefProfessor` teaching this course
-    type: array
-    items:
-      type: string
   experts:
     description: The industry experts sponsoring this course
     type: array
@@ -40,14 +28,10 @@ properties:
     items:
       type: string
 example:
-  ID: AF4912BFBD
+  id: AF4912BFBD
   code: AF4912
-  title: Capstone Project Course
   theme: Blockchain for Business Digitization
-  chiefProfessor: brian
-  deputyProfessors:
-    - brian
-    - jimmy
+  professor: brian
   experts:
     - peter
     - stanley

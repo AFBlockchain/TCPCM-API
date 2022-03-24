@@ -1,0 +1,15 @@
+type: object
+required:
+  - id
+  - grade
+properties:
+  id:
+    description: Id of the graded record
+    type: integer
+    format: int64
+  grade:
+    description: The grade
+    type: string
+example:
+  id: 132
+  grade: A
