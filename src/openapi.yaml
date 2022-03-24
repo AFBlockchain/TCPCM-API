@@ -26,6 +26,8 @@ paths:
     $ref: ./resources/clazz/class.yaml
   /groups:
     $ref: ./resources/group/groups.yaml
+  /groups/{groupId}:
+    $ref: ./resources/group/group.yaml
   /projects:
     $ref: ./resources/project/projects.yaml
   /project-records:

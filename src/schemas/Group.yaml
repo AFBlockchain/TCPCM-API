@@ -2,16 +2,15 @@ title: Group
 description: A group in a TCPC course
 type: object
 required:
-  - courseID
+  - courseId
   - name
   - notes
-  - expert
   - students
 properties:
-  courseID:
+  courseId:
     description: The TCPC course this group is under
     type: string
-  ID:
+  id:
     description: Unique identifier of a group
     type: string
   name:
@@ -20,14 +19,13 @@ properties:
   notes:
     description: Miscellaneous information about the group
     type: string
-  chiefProfessor:
-    description: The professor managing this group
-    type: string
   expert:
-    description: The industry expert assigned to this group
-    type: string
+    description: The industry expert assigned to this group. Can be Null
+    type: object
+    $ref: ./Expert.yaml
   students:
     description: The students assigned to this group
     type: array
     items:
-      type: string
+      type: object
+      $ref: ./Student.yaml
