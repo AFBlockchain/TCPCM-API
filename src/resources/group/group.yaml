@@ -1,0 +1,21 @@
+get:
+  summary: Group Detail
+  operationId: getGroupById
+  description: Information for a group
+  tags:
+    - groups
+  parameters:
+    - name: groupId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: ../../schemas/Group.yaml
+    default:
+      $ref: ../../responses/UnexpectedError.yaml

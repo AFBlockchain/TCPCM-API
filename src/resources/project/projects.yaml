@@ -12,6 +12,12 @@ get:
       required: false
       schema:
         type: string
+    - name: professor
+      in: query
+      required: false
+      description: professor email
+      schema:
+        type: string
   responses:
     '200':
       description: An array of projects
@@ -21,7 +27,6 @@ get:
             $ref: "../../schemas/Project.yaml"
     default:
       $ref: "../../responses/UnexpectedError.yaml"
-
 post:
   summary: Create Project
   operationId: createProject

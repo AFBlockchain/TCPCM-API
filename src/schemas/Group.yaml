@@ -5,7 +5,6 @@ required:
   - courseId
   - name
   - notes
-  - expert
   - students
 properties:
   courseId:
@@ -21,10 +20,9 @@ properties:
     description: Miscellaneous information about the group
     type: string
   expert:
-    description: The industry expert assigned to this group
-    type: string
+    $ref: ./Expert.yaml
   students:
     description: The students assigned to this group
     type: array
     items:
-      type: string
+      $ref: ./Student.yaml

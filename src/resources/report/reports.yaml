@@ -5,9 +5,15 @@ get:
   tags:
     - reports
   parameters:
-    - name: reportID
+    - name: courseId
       in: query
       required: false
+      schema:
+        type: string
+    - name: professor
+      in: query
+      required: false
+      description: professor email
       schema:
         type: string
   responses:

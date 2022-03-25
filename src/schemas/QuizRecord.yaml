@@ -9,12 +9,7 @@ properties:
   quizID:
     type: string
   student:
-    type: string
+    $ref: ./Student.yaml
   grade:
     type: string
-example:
-  ID: F9E52CBC-AC07-4B06-ABF9-46EE0C9F3EE1
-  quizID: AF4912BFBD-Q1
-  student: alice
-  grade: A+
   
