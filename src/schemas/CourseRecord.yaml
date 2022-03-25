@@ -9,11 +9,6 @@ properties:
   courseID:
     type: string
   student:
-    type: string
+    $ref: ./Student.yaml
   grade:
     type: string
-example:
-  ID: 5
-  courseID: AF4912BFBD
-  student: alice
-  grade: A+

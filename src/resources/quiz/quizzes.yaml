@@ -5,7 +5,17 @@ get:
   tags:
     - quizzes
   parameters:
-    - $ref: ../../parameters/query/courseID.yaml
+    - name: courseId
+      in: query
+      required: false
+      schema:
+        type: string
+    - name: professor
+      in: query
+      required: false
+      description: professor email
+      schema:
+        type: string
   responses:
     '200':
       description: An array of quizzes

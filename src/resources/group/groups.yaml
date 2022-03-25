@@ -1,3 +1,24 @@
+get:
+  summary: List Groups
+  operationId: listGroups
+  description: List groups according to the given query
+  tags:
+    - groups
+  parameters:
+    - name: courseId
+      in: query
+      required: false
+      schema:
+        type: string
+  responses:
+    '200':
+      description: An array of groups
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/Group.yaml"
+    default:
+      $ref: "../../responses/UnexpectedError.yaml"
 post:
   summary: Create Group
   operationId: createGroup
@@ -18,4 +39,3 @@ post:
             $ref: "../../schemas/Group.yaml"
     default:
       $ref : "../../responses/UnexpectedError.yaml"
-

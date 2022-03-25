@@ -12,6 +12,6 @@ properties:
     description: The `SHA256` hash of the file for the student's report.
     type: string
   student:
-    type: string
+    $ref: ./Student.yaml
   grade:
     type: string

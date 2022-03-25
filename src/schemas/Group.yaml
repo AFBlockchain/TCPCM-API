@@ -20,12 +20,9 @@ properties:
     description: Miscellaneous information about the group
     type: string
   expert:
-    description: The industry expert assigned to this group. Can be Null
-    type: object
     $ref: ./Expert.yaml
   students:
     description: The students assigned to this group
     type: array
     items:
-      type: object
       $ref: ./Student.yaml
