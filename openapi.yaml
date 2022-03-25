@@ -190,36 +190,9 @@ paths:
                   courseID:
                     type: string
                   student:
-                    title: User
-                    description: TCPCM Users
-                    type: object
-                    required:
-                      - email
-                      - name
-                      - type
-                    properties:
-                      email:
-                        type: string
-                      name:
-                        description: User's real name
-                        type: string
-                      type:
-                        description: 'the type of this account, only three types are available - PROFESSOR, STUDENT and EXPERT'
-                        type: string
-                        enum:
-                          - PROFESSOR
-                          - STUDENT
-                          - EXPERT
+                    $ref: '#/components/schemas/QuizRecord/properties/student'
                   grade:
                     type: string
-                example:
-                  ID: 5
-                  courseID: AF4912BFBD
-                  student:
-                    email: alice@gmail.com
-                    name: Alice Green
-                    type: STUDENT
-                  grade: A+
         default:
           $ref: '#/components/responses/UnexpectedError'
   '/course-records/{courseRecordID}':
@@ -245,6 +218,27 @@ paths:
         default:
           $ref: '#/components/responses/UnexpectedError'
   /groups:
+    get:
+      summary: List Groups
+      operationId: listGroups
+      description: List groups according to the given query
+      tags:
+        - groups
+      parameters:
+        - name: courseId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of groups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
     post:
       summary: Create Group
       operationId: createGroup
@@ -265,6 +259,28 @@ paths:
                 $ref: '#/components/schemas/Group'
         default:
           $ref: '#/components/responses/UnexpectedError'
+  '/groups/{groupId}':
+    get:
+      summary: Group Detail
+      operationId: getGroupById
+      description: Information for a group
+      tags:
+        - groups
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
   /projects:
     get:
       summary: List Projects
@@ -278,6 +294,12 @@ paths:
         - name: courseId
           in: query
           required: false
+          schema:
+            type: string
+        - name: professor
+          in: query
+          required: false
+          description: professor email
           schema:
             type: string
       responses:
@@ -447,10 +469,15 @@ paths:
       tags:
         - quizzes
       parameters:
-        - name: courseID
+        - name: courseId
           in: query
-          description: top level courseID
           required: false
+          schema:
+            type: string
+        - name: professor
+          in: query
+          required: false
+          description: professor email
           schema:
             type: string
       responses:
@@ -634,9 +661,15 @@ paths:
       tags:
         - reports
       parameters:
-        - name: reportID
+        - name: courseId
           in: query
           required: false
+          schema:
+            type: string
+        - name: professor
+          in: query
+          required: false
+          description: professor email
           schema:
             type: string
       responses:
@@ -950,29 +983,24 @@ components:
           type: string
         professor:
           description: The user (professor who manages this course)
-          type: string
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+            password:
+              type: string
         experts:
           description: The industry experts sponsoring this course
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Group/properties/expert'
         students:
           description: The students taking this course
           type: array
           items:
-            type: string
-      example:
-        id: AF4912BFBD
-        code: AF4912
-        theme: Blockchain for Business Digitization
-        professor: brian
-        experts:
-          - peter
-          - stanley
-        students:
-          - alice
-          - bob
-          - charlie
+            $ref: '#/components/schemas/QuizRecord/properties/student'
     Group:
       title: Group
       description: A group in a TCPC course
@@ -981,7 +1009,6 @@ components:
         - courseId
         - name
         - notes
-        - expert
         - students
       properties:
         courseId:
@@ -997,13 +1024,19 @@ components:
           description: Miscellaneous information about the group
           type: string
         expert:
-          description: The industry expert assigned to this group
-          type: string
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+            password:
+              type: string
         students:
           description: The students assigned to this group
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/QuizRecord/properties/student'
     Project:
       title: Project
       description: A project in a TCPC course
@@ -1035,28 +1068,17 @@ components:
       description: |
         A record for a TCPC project. A record is instantiated for every group for every project. A project is graded on a group basis. Grades (`gradeByProfessor`, `gradeByExpert`) will be `null` if not present.
       type: object
-      required:
-        - projectID
-        - groupID
       properties:
-        groupName:
+        id:
           type: string
-        projectID:
+        projectId:
           type: string
-        groupID:
-          type: string
-        ID:
+        groupId:
           type: string
         gradeByProfessor:
           type: string
         gradeByExpert:
           type: string
-        expert:
-          type: string
-        students:
-          type: array
-          items:
-            type: string
     Quiz:
       title: Quiz
       description: A quiz in a TCPC course
@@ -1095,14 +1117,18 @@ components:
         quizID:
           type: string
         student:
-          type: string
+          type: object
+          properties:
+            name:
+              type: string
+            studentId:
+              type: string
+            email:
+              type: string
+            password:
+              type: string
         grade:
           type: string
-      example:
-        ID: F9E52CBC-AC07-4B06-ABF9-46EE0C9F3EE1
-        quizID: AF4912BFBD-Q1
-        student: alice
-        grade: A+
     Report:
       description: A Report in a TCPC course
       type: object
@@ -1143,7 +1169,7 @@ components:
           description: The `SHA256` hash of the file for the student's report.
           type: string
         student:
-          type: string
+          $ref: '#/components/schemas/QuizRecord/properties/student'
         grade:
           type: string
     Milestone:
