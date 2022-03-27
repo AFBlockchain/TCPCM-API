@@ -5,7 +5,7 @@ get:
   tags:
     - quizzes
   parameters:
-    - name: quizID
+    - name: quizId
       in: query
       required: false
       schema:
@@ -22,9 +22,15 @@ get:
     default:
       $ref: "../../responses/UnexpectedError.yaml"
 patch:
-  summary: Grade Quiz in Batch
-  operationId: gradeQuizBatch
+  summary: Grade Quizzes
+  operationId: gradeQuizzes
   description: Grade quiz records in batch size.
+  parameters:
+    - name: quizId
+      in: query
+      required: true
+      schema:
+        type: string
   tags:
     - quizzes
   requestBody:
@@ -32,18 +38,7 @@ patch:
     content:
       application/json:
         schema:
-          title: QuizRecordGradingBatch
-          type: array
-          items:
-            type: object
-            required:
-              - quizRecordID
-              - grade
-            properties:
-              quizRecordID:
-                type: string
-              grade:
-                type: string
+          $ref: ../../schemas/Gradings.yaml
   responses:
     '200':
       description: The list of graded quiz records.

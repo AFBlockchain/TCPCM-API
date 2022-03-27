@@ -3,10 +3,10 @@ description: |
   Graded record for a quiz. A record can only be graded by the course `chiefProfessor`.
 type: object
 properties:
-  ID:
-    type: string
-    description: This ID is in `UUID` format and is for system book-keeping and not exposed to the end user.
-  quizID:
+  id:
+    type: integer
+    format: int64
+  quizId:
     type: string
   student:
     $ref: ./Student.yaml

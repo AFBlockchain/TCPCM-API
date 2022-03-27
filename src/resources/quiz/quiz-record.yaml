@@ -5,7 +5,7 @@ get:
   tags:
     - quizzes
   parameters:
-    - name: quizRecordID
+    - name: quizRecordId
       in: path
       required: true
       schema:
@@ -13,39 +13,6 @@ get:
   responses:
     '200':
       description: Expected response to a valid request
-      content:
-        application/json:
-          schema:
-            $ref: "../../schemas/QuizRecord.yaml"
-    default:
-      $ref: "../../responses/UnexpectedError.yaml"
-patch:
-  summary: Grade Quiz
-  operationId: gradeQuiz
-  description: Grade a single quiz record. The grader is the current user who must be the `chiefProfessor`.
-  tags:
-    - quizzes
-  parameters:
-    - name: quizRecordID
-      in: path
-      required: true
-      schema:
-        type: string
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          title: QuizRecordGradingPatch
-          type: object
-          required:
-            - grade
-          properties:
-            grade:
-              type: string
-  responses:
-    '200':
-      description: The graded quiz record
       content:
         application/json:
           schema:
