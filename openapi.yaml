@@ -349,7 +349,7 @@ paths:
       tags:
         - projects
       parameters:
-        - name: projectID
+        - name: projectId
           in: query
           required: false
           schema:
@@ -366,34 +366,24 @@ paths:
         default:
           $ref: '#/components/responses/UnexpectedError'
     patch:
-      summary: Batch Grade Project
-      operationId: gradeProjectInBatch
+      summary: Grade Projects
+      operationId: gradeProjects
       description: |
         Grade projects in batch. The `grader` is the current user. Only `chiefProfessor` of the course and a `ProjectRecord`'s industry supervisor can grade a project.
       tags:
         - projects
+      parameters:
+        - name: projectId
+          in: query
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              title: projectRecordGradingInBatch
-              type: object
-              required:
-                - gradedRecords
-              properties:
-                gradedRecords:
-                  type: array
-                  items:
-                    type: object
-                    required:
-                      - projectRecordID
-                      - grade
-                    properties:
-                      projectRecordID:
-                        type: string
-                      grade:
-                        type: string
+              $ref: '#/paths/~1quiz-records~1/patch/requestBody/content/application~1json/schema'
       responses:
         '200':
           description: a list of graded `ProjectRecord`s
@@ -421,40 +411,6 @@ paths:
       responses:
         '200':
           description: the `ProjectRecord`
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectRecord'
-        default:
-          $ref: '#/components/responses/UnexpectedError'
-    patch:
-      summary: Grade Project
-      operationId: gradeProject
-      description: |
-        Grade a single project record. The `grader` is the current user. Only `chiefProfessor` of the course and a `ProjectRecord`'s industry supervisor can grade a project.
-      tags:
-        - projects
-      parameters:
-        - name: projectRecordID
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              title: projectRecordGradingPatch
-              type: object
-              required:
-                - grade
-              properties:
-                grade:
-                  type: string
-      responses:
-        '200':
-          description: the graded `ProjectRecord`
           content:
             application/json:
               schema:
@@ -550,7 +506,7 @@ paths:
       tags:
         - quizzes
       parameters:
-        - name: quizID
+        - name: quizId
           in: query
           required: false
           schema:
@@ -567,9 +523,15 @@ paths:
         default:
           $ref: '#/components/responses/UnexpectedError'
     patch:
-      summary: Grade Quiz in Batch
-      operationId: gradeQuizBatch
+      summary: Grade Quizzes
+      operationId: gradeQuizzes
       description: Grade quiz records in batch size.
+      parameters:
+        - name: quizId
+          in: query
+          required: true
+          schema:
+            type: string
       tags:
         - quizzes
       requestBody:
@@ -577,16 +539,13 @@ paths:
         content:
           application/json:
             schema:
-              title: QuizRecordGradingBatch
               type: array
               items:
                 type: object
-                required:
-                  - quizRecordID
-                  - grade
                 properties:
-                  quizRecordID:
-                    type: string
+                  id:
+                    type: integer
+                    format: int64
                   grade:
                     type: string
       responses:
@@ -598,7 +557,7 @@ paths:
                 $ref: '#/components/schemas/QuizRecord'
         default:
           $ref: '#/components/responses/UnexpectedError'
-  '/quiz-records/{quizRecordID}':
+  '/quiz-records/{quizRecordId}':
     get:
       summary: Quiz Record Detail
       operationId: getQuizRecordByID
@@ -606,7 +565,7 @@ paths:
       tags:
         - quizzes
       parameters:
-        - name: quizRecordID
+        - name: quizRecordId
           in: path
           required: true
           schema:
@@ -614,39 +573,6 @@ paths:
       responses:
         '200':
           description: Expected response to a valid request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/QuizRecord'
-        default:
-          $ref: '#/components/responses/UnexpectedError'
-    patch:
-      summary: Grade Quiz
-      operationId: gradeQuiz
-      description: Grade a single quiz record. The grader is the current user who must be the `chiefProfessor`.
-      tags:
-        - quizzes
-      parameters:
-        - name: quizRecordID
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              title: QuizRecordGradingPatch
-              type: object
-              required:
-                - grade
-              properties:
-                grade:
-                  type: string
-      responses:
-        '200':
-          description: The graded quiz record
           content:
             application/json:
               schema:
@@ -720,7 +646,7 @@ paths:
       tags:
         - reports
       parameters:
-        - name: reportID
+        - name: reportId
           in: query
           required: false
           schema:
@@ -737,8 +663,8 @@ paths:
         default:
           $ref: '#/components/responses/UnexpectedError'
     patch:
-      summary: Grade Report in Batch
-      operationId: gradeReportBatch
+      summary: Grade Reports
+      operationId: gradeReports
       description: Grade report records in batch size.
       tags:
         - reports
@@ -747,18 +673,7 @@ paths:
         content:
           application/json:
             schema:
-              title: ReportRecordGradingBatch
-              type: array
-              items:
-                type: object
-                required:
-                  - reportRecordID
-                  - grade
-                properties:
-                  reportRecordID:
-                    type: string
-                  grade:
-                    type: string
+              $ref: '#/paths/~1quiz-records~1/patch/requestBody/content/application~1json/schema'
       responses:
         '200':
           description: The list of graded report records.
@@ -768,7 +683,7 @@ paths:
                 $ref: '#/components/schemas/ReportRecord'
         default:
           $ref: '#/components/responses/UnexpectedError'
-  '/report-records/{reportRecordID}':
+  '/report-records/{reportRecordId}':
     get:
       summary: Report Record Detail
       operationId: getReportRecordByID
@@ -776,7 +691,7 @@ paths:
       tags:
         - reports
       parameters:
-        - name: reportRecordID
+        - name: reportRecordId
           in: path
           required: true
           schema:
@@ -784,39 +699,6 @@ paths:
       responses:
         '200':
           description: The requested report record.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ReportRecord'
-        default:
-          $ref: '#/components/responses/UnexpectedError'
-    patch:
-      summary: Grade Report
-      operationId: gradeReport
-      description: Grade a single report record. The grader is the current user who must be the `chiefProfessor`.
-      tags:
-        - reports
-      parameters:
-        - name: reportRecordID
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              title: ReportRecordGradingPatch
-              type: object
-              required:
-                - grade
-              properties:
-                grade:
-                  type: string
-      responses:
-        '200':
-          description: The graded report record
           content:
             application/json:
               schema:
@@ -1111,10 +993,10 @@ components:
         Graded record for a quiz. A record can only be graded by the course `chiefProfessor`.
       type: object
       properties:
-        ID:
-          type: string
-          description: This ID is in `UUID` format and is for system book-keeping and not exposed to the end user.
-        quizID:
+        id:
+          type: integer
+          format: int64
+        quizId:
           type: string
         student:
           type: object
@@ -1159,14 +1041,14 @@ components:
       description: Gradable and uploadable record for a report
       type: object
       properties:
-        ID:
-          type: string
-          description: A `uuid` for system book-keeping.
-        reportID:
+        id:
+          type: integer
+          format: int64
+        reportId:
           type: string
           description: The `Report` this record is for.
-        sha256Checksum:
-          description: The `SHA256` hash of the file for the student's report.
+        documentHash:
+          description: The hash of the file for the student's report.
           type: string
         student:
           $ref: '#/components/schemas/QuizRecord/properties/student'
