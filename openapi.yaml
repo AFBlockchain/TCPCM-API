@@ -240,8 +240,8 @@ paths:
         default:
           $ref: '#/components/responses/UnexpectedError'
     post:
-      summary: Create Group
-      operationId: createGroup
+      summary: Create Groups
+      operationId: createGroups
       tags:
         - groups
       requestBody:
@@ -249,14 +249,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Group'
+              type: array
+              items:
+                $ref: '#/components/schemas/Group'
       responses:
         '201':
           description: The created Group
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Group'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group'
         default:
           $ref: '#/components/responses/UnexpectedError'
   '/groups/{groupId}':
