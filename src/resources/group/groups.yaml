@@ -20,8 +20,8 @@ get:
     default:
       $ref: "../../responses/UnexpectedError.yaml"
 post:
-  summary: Create Group
-  operationId: createGroup
+  summary: Create Groups
+  operationId: createGroups
   tags:
     - groups
   requestBody:
@@ -29,13 +29,17 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../../schemas/Group.yaml"
+          type: array
+          items:
+            $ref: "../../schemas/Group.yaml"
   responses:
     '201':
       description: The created Group
       content:
         application/json:
           schema:
-            $ref: "../../schemas/Group.yaml"
+            type: array
+            items:
+              $ref: "../../schemas/Group.yaml"
     default:
       $ref : "../../responses/UnexpectedError.yaml"
