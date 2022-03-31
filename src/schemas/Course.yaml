@@ -14,6 +14,9 @@ properties:
   theme:
     description: Course theme
     type: string
+  report:
+    description: Course report write by professor
+    type: string
   professor:
     description: The user (professor who manages this course)
     $ref: ./Professor.yaml

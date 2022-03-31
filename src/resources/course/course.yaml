@@ -25,6 +25,7 @@ patch:
   description: |
     Possible updates:
       1. Link accounts: specify `experts` and `students`
+      2. Update the course reprot by professor
   tags:
     - courses
   parameters:
