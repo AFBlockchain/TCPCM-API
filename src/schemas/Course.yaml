@@ -14,28 +14,19 @@ properties:
   theme:
     description: Course theme
     type: string
+  report:
+    description: Course report write by professor
+    type: string
   professor:
     description: The user (professor who manages this course)
-    type: string
+    $ref: ./Professor.yaml
   experts:
     description: The industry experts sponsoring this course
     type: array
     items:
-      type: string
+      $ref: ./Expert.yaml
   students:
     description: The students taking this course
     type: array
     items:
-      type: string
-example:
-  id: AF4912BFBD
-  code: AF4912
-  theme: Blockchain for Business Digitization
-  professor: brian
-  experts:
-    - peter
-    - stanley
-  students:
-    - alice
-    - bob
-    - charlie
+      $ref: ./Student.yaml

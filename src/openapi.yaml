@@ -22,6 +22,8 @@ paths:
     $ref: ./resources/course/course-record.yaml
   /groups:
     $ref: ./resources/group/groups.yaml
+  /groups/{groupId}:
+    $ref: ./resources/group/group.yaml
   /projects:
     $ref: ./resources/project/projects.yaml
   /project-records:
@@ -34,13 +36,13 @@ paths:
     $ref: ./resources/quiz/quiz.yaml
   /quiz-records/:
     $ref: ./resources/quiz/quiz-records.yaml
-  /quiz-records/{quizRecordID}:
+  /quiz-records/{quizRecordId}:
     $ref: ./resources/quiz/quiz-record.yaml
   /reports/:
     $ref: ./resources/report/reports.yaml
   /report-records/:
     $ref: ./resources/report/report-records.yaml
-  /report-records/{reportRecordID}:
+  /report-records/{reportRecordId}:
     $ref: ./resources/report/report-record.yaml
   /milestone/:
     $ref: ./resources/milestone/milestones.yaml

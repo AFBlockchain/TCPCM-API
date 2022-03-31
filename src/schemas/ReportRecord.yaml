@@ -2,16 +2,16 @@ title: ReportRecord
 description: Gradable and uploadable record for a report
 type: object
 properties:
-  ID:
-    type: string
-    description: A `uuid` for system book-keeping.
-  reportID:
+  id:
+    type: integer
+    format: int64
+  reportId:
     type: string
     description: The `Report` this record is for.
-  sha256Checksum:
-    description: The `SHA256` hash of the file for the student's report.
+  documentHash:
+    description: The hash of the file for the student's report.
     type: string
   student:
-    type: string
+    $ref: ./Student.yaml
   grade:
     type: string

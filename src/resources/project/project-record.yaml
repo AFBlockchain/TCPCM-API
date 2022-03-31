@@ -19,38 +19,3 @@ get:
             $ref: "../../schemas/ProjectRecord.yaml"
     default:
       $ref: "../../responses/UnexpectedError.yaml"
-patch:
-  summary: Grade Project
-  operationId: gradeProject
-  description: |
-    Grade a single project record. The `grader` is the current user. Only `chiefProfessor` of the course and a `ProjectRecord`'s industry supervisor can grade a project.
-  tags:
-    - projects
-  parameters:
-    - name: projectRecordID
-      in: path
-      required: true
-      schema:
-        type: string
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          title: projectRecordGradingPatch
-          type: object
-          required:
-            - grade
-          properties:
-            grade:
-              type: string  # may use a enum, keep a string for now for flexibility
-  responses:
-    '200':
-      description: the graded `ProjectRecord`
-      content:
-        application/json:
-          schema:
-            $ref: "../../schemas/ProjectRecord.yaml"
-    default:
-      $ref: "../../responses/UnexpectedError.yaml"
-  

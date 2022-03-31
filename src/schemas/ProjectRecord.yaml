@@ -2,25 +2,14 @@ title: ProjectRecord
 description: |
   A record for a TCPC project. A record is instantiated for every group for every project. A project is graded on a group basis. Grades (`gradeByProfessor`, `gradeByExpert`) will be `null` if not present.
 type: object
-required:
-  - projectID
-  - groupID
 properties:
-  groupName:
+  id:
     type: string
-  projectID:
+  projectId:
     type: string
-  groupID:
-    type: string
-  ID:
+  groupId:
     type: string
   gradeByProfessor:
     type: string
   gradeByExpert:
     type: string
-  expert:
-    type: string
-  students:
-    type: array
-    items:
-      type: string
