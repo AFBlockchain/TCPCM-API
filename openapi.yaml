@@ -90,6 +90,7 @@ paths:
       description: |
         Possible updates:
           1. Link accounts: specify `experts` and `students`
+          2. Update the course reprot by professor
       tags:
         - courses
       parameters:
@@ -121,7 +122,7 @@ paths:
       tags:
         - courses
       parameters:
-        - name: courseID
+        - name: courseId
           in: query
           required: false
           schema:
@@ -155,24 +156,7 @@ paths:
         content:
           application/json:
             schema:
-              title: CourseRecordGradings
-              type: array
-              items:
-                type: object
-                required:
-                  - id
-                  - grade
-                properties:
-                  id:
-                    description: Id of the graded record
-                    type: integer
-                    format: int64
-                  grade:
-                    description: The grade
-                    type: string
-                example:
-                  id: 132
-                  grade: A
+              $ref: '#/paths/~1quiz-records~1/patch/requestBody/content/application~1json/schema'
       responses:
         '200':
           description: The list of graded course records.
@@ -530,14 +514,14 @@ paths:
       summary: Grade Quizzes
       operationId: gradeQuizzes
       description: Grade quiz records in batch size.
+      tags:
+        - quizzes
       parameters:
         - name: quizId
           in: query
           required: true
           schema:
             type: string
-      tags:
-        - quizzes
       requestBody:
         required: true
         content:
@@ -672,6 +656,12 @@ paths:
       description: Grade report records in batch size.
       tags:
         - reports
+      parameters:
+        - name: reportId
+          in: query
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -729,6 +719,188 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Milestone'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  /badge/classes:
+    post:
+      summary: Create Badge Class
+      operationId: createBadgeClass
+      tags:
+        - badges
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: BadgeClass
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int64
+                name:
+                  type: string
+                description:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                    - COURSE
+                    - QUIZ
+                    - REPORT
+                    - PROJECT
+                subjectId:
+                  type: string
+                threshHold:
+                  type: string
+                onChainId:
+                  type: string
+                creator:
+                  title: User
+                  description: TCPCM Users
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    name:
+                      description: User's real name
+                      type: string
+                    password:
+                      type: string
+      responses:
+        '201':
+          description: The created BadgeClass
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1badge~1classes/post/requestBody/content/application~1json/schema'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    get:
+      summary: List Badge Classes
+      operationId: listBadgeClasses
+      tags:
+        - badges
+      parameters:
+        - name: creator
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: a list of BadgeClass
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/paths/~1badge~1classes/post/requestBody/content/application~1json/schema'
+  '/badge/classes/{badgeClassId}':
+    get:
+      summary: Get Badge Class
+      operationId: getBadgeClassById
+      description: Information for a specific Badge Class
+      tags:
+        - badges
+      parameters:
+        - name: badgeClassId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested BadgeClass.
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1badge~1classes/post/requestBody/content/application~1json/schema'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  /badge/assertions:
+    post:
+      summary: Issue Assertions
+      operationId: issueAssertions
+      tags:
+        - badges
+      parameters:
+        - name: badgeClassId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '201':
+          description: Issued assertions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/paths/~1badge~1classes/post/requestBody/content/application~1json/schema'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    get:
+      summary: List Assertions
+      operationId: listAssertions
+      tags:
+        - badges
+      parameters:
+        - name: issuer
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: recipient
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: a list of Assertions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/paths/~1badge~1assertions~1%7BassertionId%7D/get/responses/200/content/application~1json/schema'
+  '/badge/assertions/{assertionId}':
+    get:
+      summary: Get Assertion
+      operationId: getAssertionById
+      description: Information for a specific Assertion
+      tags:
+        - badges
+      parameters:
+        - name: assertionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested Assertion
+          content:
+            application/json:
+              schema:
+                title: BadgeClass
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                  badgeClassId:
+                    type: integer
+                    format: int64
+                  onChainId:
+                    type: string
+                  issuer:
+                    $ref: '#/paths/~1badge~1classes/post/requestBody/content/application~1json/schema/properties/creator'
+                  recipient:
+                    $ref: '#/paths/~1badge~1classes/post/requestBody/content/application~1json/schema/properties/creator'
         default:
           $ref: '#/components/responses/UnexpectedError'
   /test/public:
@@ -866,6 +1038,9 @@ components:
           type: string
         theme:
           description: Course theme
+          type: string
+        report:
+          description: Course report write by professor
           type: string
         professor:
           description: The user (professor who manages this course)
