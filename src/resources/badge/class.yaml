@@ -1,0 +1,21 @@
+get:
+  summary: Get Badge Class
+  operationId: getBadgeClassById
+  description: Information for a specific Badge Class
+  tags:
+    - badges
+  parameters:
+    - name: badgeClassId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: The requested BadgeClass.
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/BadgeClass.yaml"
+    default:
+      $ref: "../../responses/UnexpectedError.yaml"

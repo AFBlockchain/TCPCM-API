@@ -1,0 +1,40 @@
+post:
+  summary: Create Badge Class
+  operationId: createBadgeClass
+  tags:
+    - badges
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../schemas/BadgeClass.yaml"
+  responses:
+    '201':
+      description: The created BadgeClass
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/BadgeClass.yaml"
+    default:
+      $ref : "../../responses/UnexpectedError.yaml"
+get:
+  summary: List Badge Classes
+  operationId: listBadgeClasses
+  tags:
+    - badges
+  parameters:
+    - name: creator
+      in: query
+      required: false
+      schema:
+        type: string
+  responses:
+    '200':
+      description: a list of BadgeClass
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../schemas/BadgeClass.yaml"

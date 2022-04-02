@@ -1,0 +1,21 @@
+get:
+  summary: Get Assertion
+  operationId: getAssertionById
+  description: Information for a specific Assertion
+  tags:
+    - badges
+  parameters:
+    - name: assertionId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: The requested Assertion
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/Assertion.yaml"
+    default:
+      $ref: "../../responses/UnexpectedError.yaml"

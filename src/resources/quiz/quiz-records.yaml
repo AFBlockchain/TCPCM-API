@@ -25,14 +25,14 @@ patch:
   summary: Grade Quizzes
   operationId: gradeQuizzes
   description: Grade quiz records in batch size.
+  tags:
+    - quizzes
   parameters:
     - name: quizId
       in: query
       required: true
       schema:
         type: string
-  tags:
-    - quizzes
   requestBody:
     required: true
     content:

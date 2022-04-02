@@ -1,0 +1,48 @@
+post:
+  summary: Issue Assertions
+  operationId: issueAssertions
+  tags:
+    - badges
+  parameters:
+    - name: badgeClassId
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int64
+  responses:
+    '201':
+      description: Issued assertions
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../schemas/BadgeClass.yaml"
+    default:
+      $ref : "../../responses/UnexpectedError.yaml"
+get:
+  summary: List Assertions
+  operationId: listAssertions
+  tags:
+    - badges
+  parameters:
+    - name: issuer
+      in: query
+      required: false
+      schema:
+        type: string
+    - name: recipient
+      in: query
+      required: false
+      schema:
+        type: string
+  responses:
+    '200':
+      description: a list of Assertions
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../schemas/Assertion.yaml"

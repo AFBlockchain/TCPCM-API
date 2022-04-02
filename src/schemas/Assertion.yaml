@@ -1,0 +1,15 @@
+title: BadgeClass
+type: object
+properties:
+  id:
+    type: integer
+    format: int64
+  badgeClassId:
+    type: integer
+    format: int64
+  onChainId:
+    type: string
+  issuer:
+    $ref: ./User.yaml
+  recipient:
+    $ref: ./User.yaml

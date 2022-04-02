@@ -1,20 +1,11 @@
 title: User
 description: TCPCM Users
 type: object
-required:
-  - email
-  - name
-  - type
 properties:
   email:
     type: string
   name:
     description: User's real name
     type: string
-  type:
-    description: the type of this account, only three types are available - PROFESSOR, STUDENT and EXPERT
+  password:
     type: string
-    enum:
-      - PROFESSOR
-      - STUDENT
-      - EXPERT

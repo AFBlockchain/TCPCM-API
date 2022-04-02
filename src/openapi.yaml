@@ -46,6 +46,14 @@ paths:
     $ref: ./resources/report/report-record.yaml
   /milestone/:
     $ref: ./resources/milestone/milestones.yaml
+  /badge/classes:
+    $ref: ./resources/badge/classes.yaml
+  /badge/classes/{badgeClassId}:
+    $ref: ./resources/badge/class.yaml
+  /badge/assertions:
+    $ref: ./resources/badge/assertions.yaml
+  /badge/assertions/{assertionId}:
+    $ref: ./resources/badge/assertion.yaml
   /test/public:
     $ref: ./resources/test/test-public.yaml
   /test/private:

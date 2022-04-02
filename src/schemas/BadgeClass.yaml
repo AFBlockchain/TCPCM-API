@@ -1,0 +1,21 @@
+title: BadgeClass
+type: object
+properties:
+  id:
+    type: integer
+    format: int64
+  name:
+    type: string
+  description:
+    type: string
+  type:
+    type: string
+    enum: [COURSE, QUIZ, REPORT, PROJECT]
+  subjectId:
+    type: string
+  threshHold:
+    type: string
+  onChainId:
+    type: string
+  creator:
+    $ref: ./User.yaml

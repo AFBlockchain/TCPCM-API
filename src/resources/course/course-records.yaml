@@ -5,7 +5,7 @@ get:
   tags:
     - courses
   parameters:
-    - name: courseID
+    - name: courseId
       in: query
       required: false
       schema:
@@ -39,11 +39,7 @@ patch:
     content:
       application/json:
         schema:
-          title: CourseRecordGradings
-          type: array
-          items:
-            type: object
-            $ref: ../../schemas/Grading.yaml
+          $ref: ../../schemas/Gradings.yaml
   responses:
     '200':
       description: The list of graded course records.

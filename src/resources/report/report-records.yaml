@@ -27,6 +27,12 @@ patch:
   description: Grade report records in batch size.
   tags:
     - reports
+  parameters:
+    - name: reportId
+      in: query
+      required: true
+      schema:
+        type: string
   requestBody:
     required: true
     content:
